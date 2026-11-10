@@ -1,0 +1,272 @@
+---
+export interface Props {
+  variant: "portal-frame" | "roof-truss" | "a-frame";
+  title: string;
+  specTag: string;
+}
+
+const { variant, title, specTag } = Astro.props;
+---
+
+<figure
+  class:list={["blueprint-figure", `variant-${variant}`]}
+  aria-label={`${title} 3D-inspired architectural elevation placeholder`}
+>
+  <div class="blueprint-header">
+    <span class="blueprint-badge">3D Architectural Elevation</span>
+    <span class="blueprint-spec">{specTag}</span>
+  </div>
+
+  <div class="blueprint-canvas">
+    {
+      variant === "portal-frame" && (
+        <svg
+          viewBox="0 0 560 320"
+          role="img"
+          aria-label="3D-shaded architectural elevation of a clear-span steel portal frame building"
+          class="schematic-svg"
+        >
+          <defs>
+            <linearGradient id="svc-sky-1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#DCE6EB" />
+              <stop offset="100%" stop-color="#F3F5F4" />
+            </linearGradient>
+          </defs>
+          <rect width="560" height="320" rx="6" fill="url(#svc-sky-1)" />
+          <rect x="24" y="264" width="512" height="14" rx="2" fill="#8E9DA6" />
+          <line x1="24" y1="264" x2="536" y2="264" stroke="#17212B" stroke-width="2.5" />
+
+          <!-- Rear Perspective Portal Bays -->
+          <path
+            d="M 135 264 L 135 128 L 305 74 L 475 128 L 475 264"
+            fill="#F3F5F4"
+            fill-opacity="0.65"
+            stroke="#5C6F7E"
+            stroke-width="3"
+          />
+          <line x1="80" y1="146" x2="135" y2="128" stroke="#5C6F7E" stroke-width="2" />
+          <line x1="280" y1="84" x2="305" y2="74" stroke="#E47732" stroke-width="3" />
+          <line x1="435" y1="146" x2="475" y2="128" stroke="#5C6F7E" stroke-width="2" />
+
+          <!-- Primary Wide-Flange Steel Portal Frame -->
+          <path
+            d="M 80 264 L 80 146 L 280 84 L 435 146 L 435 264"
+            fill="rgba(23, 33, 43, 0.05)"
+            stroke="#17212B"
+            stroke-width="7"
+            stroke-linejoin="miter"
+          />
+          <line x1="80" y1="202" x2="435" y2="202" stroke="#32414E" stroke-width="4.5" />
+          <polygon points="84,148 128,134 84,182" fill="#E47732" />
+          <polygon points="431,148 387,134 431,182" fill="#E47732" />
+          <polygon points="280,87 248,98 280,106 312,98" fill="#E47732" />
+
+          <rect x="66" y="258" width="28" height="6" fill="#17212B" />
+          <rect x="421" y="258" width="28" height="6" fill="#17212B" />
+
+          <text
+            x="280"
+            y="298"
+            text-anchor="middle"
+            fill="#17212B"
+            font-family="system-ui, sans-serif"
+            font-weight="700"
+            font-size="12"
+          >
+            WIDE-FLANGE CLEAR-SPAN PORTAL FRAME &amp; MEZZANINE SYSTEM
+          </text>
+        </svg>
+      )
+    }
+
+    {
+      variant === "roof-truss" && (
+        <svg
+          viewBox="0 0 560 320"
+          role="img"
+          aria-label="3D-shaded architectural elevation of a long-span steel roof truss and standing-seam cladding"
+          class="schematic-svg"
+        >
+          <defs>
+            <linearGradient id="svc-sky-2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#DCE6EB" />
+              <stop offset="100%" stop-color="#F3F5F4" />
+            </linearGradient>
+          </defs>
+          <rect width="560" height="320" rx="6" fill="url(#svc-sky-2)" />
+
+          <rect x="54" y="175" width="14" height="95" fill="#17212B" />
+          <rect x="492" y="175" width="14" height="95" fill="#17212B" />
+
+          <!-- Standing-Seam Metallic Roof Deck -->
+          <path
+            d="M 35 162 L 280 68 L 525 162"
+            fill="none"
+            stroke="#17212B"
+            stroke-width="5"
+          />
+          <path
+            d="M 35 166 L 280 72 L 525 166"
+            fill="none"
+            stroke="#E47732"
+            stroke-width="2.5"
+          />
+          <polygon
+            points="245,62 254,48 306,48 315,62"
+            fill="#17212B"
+          />
+
+          <!-- Space Truss Webbing -->
+          <polygon
+            points="58,175 280,86 502,175"
+            fill="rgba(23, 33, 43, 0.08)"
+            stroke="#17212B"
+            stroke-width="4"
+          />
+          <line x1="280" y1="86" x2="280" y2="175" stroke="#17212B" stroke-width="3" />
+          <line x1="168" y1="130" x2="168" y2="175" stroke="#17212B" stroke-width="2.5" />
+          <line x1="392" y1="130" x2="392" y2="175" stroke="#17212B" stroke-width="2.5" />
+          <line x1="112" y1="175" x2="168" y2="130" stroke="#E47732" stroke-width="2.2" />
+          <line x1="168" y1="175" x2="280" y2="86" stroke="#E47732" stroke-width="2.2" />
+          <line x1="448" y1="175" x2="392" y2="130" stroke="#E47732" stroke-width="2.2" />
+          <line x1="392" y1="175" x2="280" y2="86" stroke="#E47732" stroke-width="2.2" />
+
+          <text
+            x="280"
+            y="235"
+            text-anchor="middle"
+            fill="#17212B"
+            font-family="system-ui, sans-serif"
+            font-weight="700"
+            font-size="12.5"
+          >
+            TUBULAR SPACE-TRUSS &amp; STANDING-SEAM ROOF ENVELOPE
+          </text>
+        </svg>
+      )
+    }
+
+    {
+      variant === "a-frame" && (
+        <svg
+          viewBox="0 0 560 320"
+          role="img"
+          aria-label="3D-shaded architectural elevation of a modern steel and glass A-Frame structure"
+          class="schematic-svg"
+        >
+          <defs>
+            <linearGradient id="svc-sky-3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#DCE6EB" />
+              <stop offset="100%" stop-color="#F3F5F4" />
+            </linearGradient>
+          </defs>
+          <rect width="560" height="320" rx="6" fill="url(#svc-sky-3)" />
+
+          <!-- Terrain & Cantilevered Terrace Deck -->
+          <path d="M 40 278 Q 260 258 520 282" fill="none" stroke="#5C6F7E" stroke-width="2" />
+          <rect x="126" y="242" width="8" height="32" fill="#17212B" />
+          <rect x="276" y="242" width="8" height="28" fill="#17212B" />
+          <rect x="426" y="242" width="8" height="36" fill="#17212B" />
+          <rect x="92" y="234" width="376" height="9" fill="#17212B" />
+          <rect x="92" y="234" width="376" height="2.5" fill="#E47732" />
+
+          <!-- 3D Extruded Rear Roof Plane -->
+          <polygon points="280,34 316,24 446,222 420,234" fill="#263646" />
+
+          <!-- Curtain-Wall Glazing & Copper Soffit -->
+          <polygon points="140,234 280,38 420,234" fill="#354B5B" stroke="#17212B" stroke-width="6" />
+          <polyline points="134,234 280,28 426,234" fill="none" stroke="#E47732" stroke-width="3.5" />
+          <line x1="198" y1="154" x2="362" y2="154" stroke="#E47732" stroke-width="4" />
+          <line x1="280" y1="42" x2="280" y2="234" stroke="#17212B" stroke-width="3" />
+          <line x1="235" y1="154" x2="235" y2="234" stroke="#17212B" stroke-width="2" />
+          <line x1="325" y1="154" x2="325" y2="234" stroke="#17212B" stroke-width="2" />
+
+          <text
+            x="280"
+            y="302"
+            text-anchor="middle"
+            fill="#17212B"
+            font-family="system-ui, sans-serif"
+            font-weight="700"
+            font-size="12"
+          >
+            ARCHITECTURAL 60° STEEL A-FRAME &amp; CURTAIN-WALL GLAZING
+          </text>
+        </svg>
+      )
+    }
+  </div>
+
+  <figcaption class="blueprint-caption">
+    <span class="caption-dot" aria-hidden="true"></span>
+    <span>Architectural Visualization Placeholder — Final Site Photography Pending</span>
+  </figcaption>
+</figure>
+
+<style>
+  .blueprint-figure {
+    margin: 0;
+    background-color: var(--surface-white);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blueprint-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--color-navy-deep);
+    color: var(--color-mist-white);
+    font-size: var(--text-xs);
+  }
+
+  .blueprint-badge {
+    color: var(--color-orange-primary);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .blueprint-spec {
+    color: var(--color-silver);
+    font-size: 0.75rem;
+  }
+
+  .blueprint-canvas {
+    position: relative;
+    background-color: var(--color-mist-white);
+    padding: var(--space-md);
+  }
+
+  .schematic-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-xs);
+  }
+
+  .blueprint-caption {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    border-top: 1px solid var(--border-subtle);
+    font-size: var(--text-xs);
+    color: var(--color-slate);
+    background-color: var(--surface-white);
+  }
+
+  .caption-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-orange-primary);
+    flex-shrink: 0;
+  }
+</style>

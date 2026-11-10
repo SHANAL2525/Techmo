@@ -1,0 +1,660 @@
+---
+import CraneWorldStage from "../crane/CraneWorldStage.astro";
+import { serviceDivisions, engineeringWorkflow } from "../../data/services";
+import { projectPlaceholders } from "../../data/projects";
+
+const toneClasses = ["tone-copper", "tone-silver", "tone-sage"];
+---
+
+<div id="construction-journey" class="construction-journey">
+  <!-- =====================================================================
+       FULL-VIEWPORT PINNED 3D ARCHITECTURAL CONSTRUCTION WORLD
+       ===================================================================== -->
+  <div class="world-sticky-backdrop">
+    <CraneWorldStage />
+  </div>
+
+  <!-- =====================================================================
+       COMPACT, ELEGANT ARCHITECTURAL OVERLAYS (Unobstructed Site View)
+       ===================================================================== -->
+  <div class="container world-overlays-track">
+    <!-- SCENE 01: Welcome to TECHMO -->
+    <section
+      id="discover"
+      data-story-scene="1"
+      class="scene-waypoint align-right is-active-chapter"
+      aria-labelledby="heading-discover"
+    >
+      <div class="contextual-overlay overlay-hero">
+        <div class="overlay-meta-bar">
+          <span class="meta-accent-line" aria-hidden="true"></span>
+          <span class="scene-kicker">TECHMO Engineering • Sri Lanka</span>
+        </div>
+
+        <h1 id="heading-discover" class="text-display overlay-hero-title">
+          WE BUILD <span class="text-accent-copper">WHAT&apos;S NEXT.</span>
+        </h1>
+
+        <p class="overlay-lead">
+          Scroll to direct the construction process — from container rigging and
+          structural steel erection to standing-seam roofing and modern A-Frame
+          architecture.
+        </p>
+
+        <div class="overlay-actions">
+          <a href="#crane-lift" class="btn-primary">
+            <span>Begin Construction</span>
+            <span aria-hidden="true">&darr;</span>
+          </a>
+          <a href="#our-expertise" class="btn-secondary">
+            <span>Our Expertise</span>
+          </a>
+          <a href="#start-a-project" class="btn-text">
+            <span>Skip Journey &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 02: Crane Activates & Lifts Container -->
+    <section
+      id="crane-lift"
+      data-story-scene="2"
+      class="scene-waypoint align-right"
+      aria-labelledby="heading-crane-lift"
+    >
+      <div class="contextual-overlay">
+        <div class="overlay-meta-bar">
+          <span class="meta-accent-line" aria-hidden="true"></span>
+          <span class="scene-kicker">02 • Heavy Rigging &amp; Precision</span>
+        </div>
+
+        <h2 id="heading-crane-lift" class="h3 overlay-title">
+          Engineered Off-Site. Assembled with Precision.
+        </h2>
+
+        <p class="overlay-copy">
+          As the tower crane hoists and positions the TECHMO structural module,
+          it demonstrates our core methodology: controlled workshop fabrication
+          paired with rapid, accurate site assembly.
+        </p>
+
+        <ul class="compact-feature-pills" role="list">
+          <li class="tone-copper">Pre-Engineered Steel</li>
+          <li class="tone-silver">Wide Clear Spans</li>
+          <li class="tone-sage">Monsoon-Rated Envelope</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SCENE 03: Container Opens & Reveals Expertise -->
+    <section
+      id="our-expertise"
+      data-story-scene="3"
+      class="scene-waypoint align-right"
+      aria-labelledby="heading-expertise"
+    >
+      <div class="contextual-overlay overlay-wide">
+        <div class="overlay-meta-bar">
+          <span class="meta-accent-line" aria-hidden="true"></span>
+          <span class="scene-kicker">03 • Our Expertise</span>
+        </div>
+
+        <h2 id="heading-expertise" class="h3 overlay-title">
+          Three Specialized Engineering Divisions.
+        </h2>
+
+        <div class="expertise-overlay-grid">
+          {
+            serviceDivisions.map((division, idx) => (
+              <article
+                id={division.sectionId}
+                class:list={[
+                  "expertise-mini-card",
+                  toneClasses[idx % toneClasses.length],
+                ]}
+              >
+                <span class="mini-eyebrow">{division.eyebrow}</span>
+                <h3 class="h5 mini-title">{division.title}</h3>
+                <p class="text-small mini-desc">{division.shortDescription}</p>
+                <ul class="mini-cap-list" role="list">
+                  {division.capabilities.slice(0, 3).map((cap) => (
+                    <li>{cap}</li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 04: Steel Building Assembles (How We Build) -->
+    <section
+      id="how-we-build"
+      data-story-scene="4"
+      class="scene-waypoint align-left"
+      aria-labelledby="heading-how-we-build"
+    >
+      <div class="contextual-overlay">
+        <div class="overlay-meta-bar">
+          <span class="meta-accent-line" aria-hidden="true"></span>
+          <span class="scene-kicker">04 • How We Build</span>
+        </div>
+
+        <h2 id="heading-how-we-build" class="h3 overlay-title">
+          Live Structural Assembly.
+        </h2>
+
+        <p class="overlay-copy">
+          Watch the crane erect the wide-flange steel portal columns, lower the
+          long-span tubular roof truss into place, and position the architectural
+          steel A-Frame onto the terrace deck.
+        </p>
+
+        <ol class="compact-steps" role="list">
+          {
+            engineeringWorkflow.map((phase) => (
+              <li>
+                <span class="step-num">{phase.step}</span>
+                <div>
+                  <strong>{phase.title}</strong>
+                  <p>{phase.description}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <!-- SCENE 05: Project Showcase Emerges (Our Work) -->
+    <section
+      id="our-work"
+      data-story-scene="5"
+      class="scene-waypoint align-left"
+      aria-labelledby="heading-our-work"
+    >
+      <div class="contextual-overlay overlay-wide" id="project-gallery">
+        <div class="overlay-meta-bar">
+          <span class="meta-accent-line" aria-hidden="true"></span>
+          <span class="scene-kicker">05 • Our Work &amp; Structural Systems</span>
+        </div>
+
+        <h2 id="heading-our-work" class="h3 overlay-title">
+          Architectural &amp; Industrial Typologies.
+        </h2>
+
+        <p class="overlay-copy">
+          Explore representative building systems across our steel, roofing and
+          A-Frame divisions. <em>(Concept specifications shown until final project photography is supplied.)</em>
+        </p>
+
+        <div class="work-overlay-grid">
+          {
+            projectPlaceholders.map((project, idx) => (
+              <article
+                class:list={[
+                  "work-mini-card",
+                  toneClasses[idx % toneClasses.length],
+                ]}
+              >
+                <span class="work-cat">{project.category}</span>
+                <h3 class="h6 work-title">{project.title}</h3>
+                <p class="text-small work-desc">{project.summary}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 06: Contact Experience (Start a Project) -->
+    <section
+      id="start-a-project"
+      data-story-scene="6"
+      class="scene-waypoint align-left"
+      aria-labelledby="heading-start-project"
+    >
+      <div class="contextual-overlay overlay-contact" id="contact-cta">
+        <div class="overlay-meta-bar">
+          <span class="meta-accent-line" aria-hidden="true"></span>
+          <span class="scene-kicker">06 • Start a Project</span>
+        </div>
+
+        <h2 id="heading-start-project" class="h3 overlay-title">
+          Engineer Your Next Structure with TECHMO.
+        </h2>
+
+        <p class="overlay-copy">
+          The complex is complete. Share your structure type, approximate span
+          dimensions, and site location in Sri Lanka to begin an engineering
+          consultation.
+        </p>
+
+        <div class="contact-overlay-channels">
+          <div class="channel-pill">
+            <span>Engineering Desk</span>
+            <strong>Verified Phone Pending</strong>
+          </div>
+          <div class="channel-pill">
+            <span>Project Estimation</span>
+            <strong>Verified Email Pending</strong>
+          </div>
+          <div class="channel-pill">
+            <span>Service Coverage</span>
+            <strong>Islandwide • Sri Lanka</strong>
+          </div>
+        </div>
+
+        <div class="overlay-actions">
+          <a href="#discover" class="btn-secondary">
+            <span>&uarr; Replay Construction</span>
+          </a>
+          <a href="#our-expertise" class="btn-primary">
+            <span>Review Divisions</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+  import { initCraneScrollController } from "../../animations/craneScrollController";
+
+  let controller = initCraneScrollController();
+
+  window.addEventListener("pagehide", () => {
+    if (controller) {
+      controller.destroy();
+      controller = null;
+    }
+  });
+</script>
+
+<style>
+  .construction-journey {
+    position: relative;
+    width: 100%;
+    background-color: var(--color-mist-white);
+  }
+
+  /* Full-Viewport Pinned 3D Construction World */
+  .world-sticky-backdrop {
+    position: sticky;
+    top: 4.5rem;
+    width: 100%;
+    height: calc(100vh - 4.5rem);
+    z-index: var(--z-base);
+    overflow: hidden;
+  }
+
+  /* Compact Contextual Overlays Track */
+  .world-overlays-track {
+    position: relative;
+    z-index: var(--z-container-content);
+    margin-top: calc(-100vh + 4.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 42vh;
+    padding-block: 6vh 20vh;
+    pointer-events: none;
+  }
+
+  .scene-waypoint {
+    min-height: 86vh;
+    display: flex;
+    align-items: flex-start;
+    scroll-margin-top: 5.75rem;
+  }
+
+  .scene-waypoint.align-right {
+    justify-content: flex-end;
+  }
+
+  .scene-waypoint.align-left {
+    justify-content: flex-start;
+  }
+
+  /* Compact, Refined Architectural Glass Overlay Panel */
+  .contextual-overlay {
+    pointer-events: auto;
+    width: 100%;
+    max-width: 26rem;
+    background-color: rgba(243, 245, 244, 0.84);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.78);
+    border-left: 3px solid var(--color-orange-primary);
+    border-radius: var(--radius-md);
+    padding: 1.35rem 1.5rem;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    opacity: 0.35;
+    transform: translate3d(0, 10px, 0);
+    transition: opacity var(--duration-base) var(--ease-standard),
+      transform var(--duration-base) var(--ease-standard),
+      box-shadow var(--duration-base) var(--ease-standard);
+  }
+
+  .scene-waypoint.is-active-chapter .contextual-overlay {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .overlay-wide {
+    max-width: 44rem;
+  }
+
+  .overlay-contact {
+    max-width: 34rem;
+  }
+
+  .overlay-meta-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .meta-accent-line {
+    width: 1.25rem;
+    height: 2px;
+    background-color: var(--color-orange-primary);
+    flex-shrink: 0;
+  }
+
+  .scene-kicker {
+    font-size: 0.74rem;
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-slate);
+  }
+
+  .overlay-hero-title {
+    margin: 0;
+    font-size: clamp(1.85rem, 1.45rem + 1.8vw, 2.75rem);
+    line-height: 1.08;
+    color: var(--color-navy-deep);
+  }
+
+  .text-accent-copper {
+    color: var(--color-orange-primary);
+  }
+
+  .overlay-title {
+    margin: 0;
+    font-size: clamp(1.3rem, 1.15rem + 0.65vw, 1.65rem);
+    color: var(--color-navy-deep);
+  }
+
+  .overlay-lead,
+  .overlay-copy {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-slate);
+    line-height: 1.55;
+  }
+
+  .overlay-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.15rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.15rem;
+    background-color: var(--color-navy-deep);
+    color: var(--color-mist-white);
+    font-size: 0.8rem;
+    font-weight: var(--weight-bold);
+    text-decoration: none;
+    border-radius: var(--radius-xs);
+    border-left: 3px solid var(--color-orange-primary);
+    transition: background-color var(--duration-fast) var(--ease-standard);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-orange-primary);
+    color: var(--color-white);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.65rem 1.05rem;
+    background-color: rgba(255, 255, 255, 0.85);
+    color: var(--color-navy-deep);
+    border: 1px solid var(--border-strong);
+    font-size: 0.8rem;
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+    border-radius: var(--radius-xs);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-orange-primary);
+    color: var(--color-orange-active);
+  }
+
+  .btn-text {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: var(--weight-semibold);
+    color: var(--color-slate);
+    text-decoration: none;
+  }
+
+  .compact-feature-pills {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .compact-feature-pills li {
+    padding: 0.28rem 0.65rem;
+    font-size: 0.74rem;
+    font-weight: var(--weight-semibold);
+    color: var(--color-navy-deep);
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .tone-copper {
+    background-color: rgba(228, 119, 50, 0.1);
+    border-color: rgba(228, 119, 50, 0.32);
+  }
+
+  .tone-silver {
+    background-color: rgba(220, 230, 235, 0.72);
+    border-color: #BCCAD3;
+  }
+
+  .tone-sage {
+    background-color: rgba(168, 193, 181, 0.28);
+    border-color: #A8C1B5;
+  }
+
+  .expertise-overlay-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+    gap: 0.65rem;
+  }
+
+  .expertise-mini-card {
+    scroll-margin-top: 6rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .mini-eyebrow {
+    font-size: 0.68rem;
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-orange-active);
+  }
+
+  .mini-title {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--color-navy-deep);
+  }
+
+  .mini-desc {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--color-slate);
+    line-height: 1.45;
+  }
+
+  .mini-cap-list {
+    margin: 0;
+    padding-left: 0.95rem;
+    font-size: 0.73rem;
+    color: var(--color-slate);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .compact-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .compact-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.5rem 0.65rem;
+    background-color: rgba(255, 255, 255, 0.78);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xs);
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: var(--radius-xs);
+    background-color: var(--color-navy-deep);
+    color: var(--color-mist-white);
+    font-size: 0.7rem;
+    font-weight: var(--weight-bold);
+    flex-shrink: 0;
+  }
+
+  .compact-steps strong {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--color-navy-deep);
+  }
+
+  .compact-steps p {
+    margin: 0;
+    font-size: 0.74rem;
+    color: var(--color-slate);
+    line-height: 1.4;
+  }
+
+  .work-overlay-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+    gap: 0.55rem;
+  }
+
+  .work-mini-card {
+    padding: 0.7rem 0.85rem;
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .work-cat {
+    font-size: 0.68rem;
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-orange-active);
+  }
+
+  .work-title {
+    margin: 0;
+    font-size: 0.86rem;
+    color: var(--color-navy-deep);
+  }
+
+  .work-desc {
+    margin: 0;
+    font-size: 0.74rem;
+    color: var(--color-slate);
+    line-height: 1.4;
+  }
+
+  .contact-overlay-channels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .channel-pill {
+    padding: 0.55rem 0.75rem;
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xs);
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .channel-pill span {
+    font-size: 0.68rem;
+    color: var(--color-slate-muted);
+  }
+
+  .channel-pill strong {
+    font-size: 0.78rem;
+    color: var(--color-navy-deep);
+  }
+
+  @media (max-width: 47.99rem), (prefers-reduced-motion: reduce) {
+    .contextual-overlay {
+      opacity: 1;
+      transform: none;
+      max-width: 100%;
+      padding: 1.15rem;
+    }
+
+    .world-overlays-track {
+      gap: 20vh;
+    }
+  }
+</style>

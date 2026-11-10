@@ -1,0 +1,216 @@
+---
+import { engineeringWorkflow } from "../../data/services";
+import SectionHeading from "../ui/SectionHeading.astro";
+---
+
+<section id="about-techmo" class="about-section" aria-labelledby="about-heading">
+  <div class="container about-wrapper">
+    <div class="about-intro-grid">
+      <SectionHeading
+        eyebrow="About TECHMO"
+        title="Engineered Precision From Foundation to Roofline."
+        description="TECHMO brings structural engineering discipline, workshop steel fabrication and site construction execution together under a unified, dependable workflow."
+        headingId="about-heading"
+        accentTone="warm"
+      />
+
+      <div class="about-principles">
+        <div class="principle-card tone-warm">
+          <span class="principle-tag">Climate-Ready Engineering</span>
+          <h3 class="h5 principle-title">Built for Sri Lankan Conditions</h3>
+          <p class="text-small principle-copy">
+            Every steel portal frame, roof truss and residential A-Frame is
+            detailed to handle local wind loads, heavy monsoon rainfall and
+            long-term corrosion resistance.
+          </p>
+        </div>
+
+        <div class="principle-card tone-sky">
+          <span class="principle-tag">Clean &amp; Predictable Delivery</span>
+          <h3 class="h5 principle-title">Off-Site Fabrication, Fast Erection</h3>
+          <p class="text-small principle-copy">
+            By fabricating structural steel components under controlled workshop
+            conditions, on-site assembly is cleaner, faster and more predictable
+            than conventional builds.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="workflow-block">
+      <div class="workflow-header">
+        <span class="workflow-label">Our 4-Step Process</span>
+        <h3 class="h3 workflow-heading">How TECHMO Delivers Your Structure</h3>
+      </div>
+
+      <ol class="workflow-grid" role="list">
+        {
+          engineeringWorkflow.map((phase) => (
+            <li class="workflow-step">
+              <div class="step-top">
+                <span class="step-number">Step {phase.step}</span>
+                <span class="step-line" aria-hidden="true" />
+              </div>
+              <h4 class="h5 step-title">{phase.title}</h4>
+              <p class="text-small step-desc">{phase.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    padding-block: var(--space-3xl);
+    background-color: var(--surface-warm-cream);
+    border-bottom: 1px solid var(--border-warm);
+  }
+
+  .about-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .about-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .about-principles {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .principle-card {
+    background-color: var(--surface-white);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .principle-card.tone-warm {
+    border-left: 4px solid var(--color-orange-primary);
+  }
+
+  .principle-card.tone-sky {
+    border-left: 4px solid #0284C7;
+  }
+
+  .principle-tag {
+    font-size: var(--text-xs);
+    color: var(--color-orange-active);
+    font-weight: var(--weight-bold);
+  }
+
+  .principle-card.tone-sky .principle-tag {
+    color: #0284C7;
+  }
+
+  .principle-title {
+    margin: 0;
+    color: var(--color-navy-deep);
+  }
+
+  .principle-copy {
+    margin: 0;
+    color: var(--color-slate);
+  }
+
+  .workflow-block {
+    background-color: var(--surface-white);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .workflow-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .workflow-label {
+    font-size: var(--text-xs);
+    color: var(--color-orange-active);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .workflow-heading {
+    margin: 0;
+    color: var(--color-navy-deep);
+  }
+
+  .workflow-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .workflow-step {
+    background-color: var(--surface-light-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .step-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .step-number {
+    padding: 0.25rem 0.7rem;
+    background-color: var(--surface-warm-cream);
+    color: var(--color-orange-active);
+    border: 1px solid var(--border-warm);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    border-radius: var(--radius-pill);
+  }
+
+  .step-line {
+    flex: 1;
+    height: 1px;
+    background-color: var(--border-strong);
+  }
+
+  .step-title {
+    margin: 0;
+    color: var(--color-navy-deep);
+  }
+
+  .step-desc {
+    margin: 0;
+    color: var(--color-slate);
+  }
+
+  @media (min-width: 62rem) {
+    .about-intro-grid {
+      grid-template-columns: 1.05fr 1fr;
+    }
+  }
+</style>

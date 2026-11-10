@@ -1,0 +1,117 @@
+/* ==========================================================================
+   TECHMO Design System — Tokens ("Premium Realistic Architectural")
+   Palette: Steel Navy (#17212B), Silver (#DCE6EB), Mist White (#F3F5F4),
+            Copper Orange (#E47732), Sage Green (#A8C1B5)
+   ========================================================================== */
+
+:root {
+  /* Core Architectural Brand Palette */
+  --color-orange-primary: #E47732;
+  --color-orange-hover: #CC6322;
+  --color-orange-active: #B25216;
+  --color-orange-subtle: rgba(228, 119, 50, 0.14);
+
+  --color-navy-deep: #17212B;
+  --color-slate: #32414E;
+  --color-slate-muted: #5C6F7E;
+  --color-silver: #DCE6EB;
+  --color-mist-white: #F3F5F4;
+  --color-sage-green: #A8C1B5;
+  --color-white: #FFFFFF;
+
+  /* Architectural Surfaces */
+  --surface-light-bg: #F3F5F4;
+  --surface-white: #FFFFFF;
+  --surface-silver: #DCE6EB;
+  --surface-warm-cream: #F7F1EB;
+  --surface-soft-sky: #E5EEF2;
+  --surface-soft-mint: #E6EFEA;
+
+  /* Semantic Aliases */
+  --color-black-industrial: #17212B;
+  --color-steel-grey: #5C6F7E;
+  --surface-light-primary: #FFFFFF;
+  --surface-light-secondary: #F3F5F4;
+  --surface-light-elevated: #DCE6EB;
+  --surface-dark-primary: #17212B;
+  --surface-dark-secondary: #212E3B;
+  --surface-dark-elevated: #2D3E4E;
+  --surface-dark-overlay: rgba(243, 245, 244, 0.9);
+
+  /* Accessible Text Colours */
+  --text-primary: #17212B;
+  --text-secondary: #32414E;
+  --text-muted: #5C6F7E;
+  --text-accent: #B25216;
+
+  --text-on-light-primary: #17212B;
+  --text-on-light-secondary: #32414E;
+  --text-on-light-muted: #5C6F7E;
+
+  --text-on-dark-primary: #F3F5F4;
+  --text-on-dark-secondary: #DCE6EB;
+  --text-on-dark-muted: #9FB0BC;
+
+  /* Architectural Borders & Hairlines */
+  --border-subtle: #D5E0E6;
+  --border-strong: #BCCAD3;
+  --border-warm: rgba(228, 119, 50, 0.35);
+  --border-sky: #C5D6E0;
+  --border-mint: #A8C1B5;
+  --border-accent: #E47732;
+
+  /* Realistic Depth Shadows */
+  --shadow-xs: 0 1px 2px rgba(23, 33, 43, 0.06);
+  --shadow-sm: 0 4px 12px rgba(23, 33, 43, 0.08);
+  --shadow-md: 0 12px 28px -6px rgba(23, 33, 43, 0.12);
+  --shadow-lg: 0 24px 48px -12px rgba(23, 33, 43, 0.18);
+
+  /* Responsive Spacing Scale */
+  --space-2xs: clamp(0.25rem, 0.2rem + 0.2vw, 0.375rem);
+  --space-xs: clamp(0.5rem, 0.45rem + 0.25vw, 0.65rem);
+  --space-sm: clamp(0.75rem, 0.65rem + 0.45vw, 1rem);
+  --space-md: clamp(1rem, 0.9rem + 0.6vw, 1.35rem);
+  --space-lg: clamp(1.4rem, 1.15rem + 1.2vw, 2.1rem);
+  --space-xl: clamp(2rem, 1.65rem + 2vw, 3.5rem);
+  --space-2xl: clamp(3rem, 2.4rem + 3.5vw, 5.25rem);
+  --space-3xl: clamp(4.25rem, 3.2rem + 5vw, 7.25rem);
+
+  /* Refined Architectural Border Radii */
+  --radius-none: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+
+  /* Container Widths & Layout */
+  --container-sm: 42rem;
+  --container-md: 60rem;
+  --container-lg: 74rem;
+  --container-xl: 84rem;
+  --container-gutter: clamp(1.25rem, 3.5vw, 2.75rem);
+
+  /* Animation Duration & Easing Tokens */
+  --duration-instant: 80ms;
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 550ms;
+  --duration-crane: 850ms;
+
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-industrial: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Z-Index Layers */
+  --z-background: -1;
+  --z-base: 1;
+  --z-container-content: 10;
+  --z-container-doors: 20;
+  --z-crane-rig: 30;
+  --z-crane-hook: 40;
+  --z-sticky: 100;
+  --z-header: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-skip-link: 999;
+}

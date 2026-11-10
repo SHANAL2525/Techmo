@@ -1,0 +1,381 @@
+---
+import { primaryNavItems } from "../../data/navigation";
+
+const isHome = Astro.url.pathname === "/";
+const prefix = isHome ? "" : "/";
+---
+
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a
+      href={`${prefix}#discover`}
+      class="brand-link"
+      aria-label="TECHMO — Back to start of journey"
+    >
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" width="34" height="34" role="presentation">
+          <rect x="2" y="2" width="32" height="32" rx="4" fill="#17212B" />
+          <path d="M9 11H27V15H20V26H16V15H9V11Z" fill="#F3F5F4" />
+          <rect x="22" y="21" width="5" height="5" rx="1" fill="#E47732" />
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">TECHMO</span>
+        <span class="brand-sub">Engineering &amp; Construction</span>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Story journey navigation">
+      <ul class="nav-list" role="list">
+        {
+          primaryNavItems.map((item, index) => (
+            <li>
+              <a
+                href={`${prefix}${item.href}`}
+                data-nav-target={item.id}
+                class:list={["nav-link", { "is-active": isHome && index === 0 }]}
+                aria-current={isHome && index === 0 ? "location" : undefined}
+              >
+                <span>{item.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href={`${prefix}#start-a-project`} class="skip-journey-btn">
+        <span>{isHome ? "Skip Journey" : "Back to Journey"}</span>
+      </a>
+      <a href={`${prefix}#start-a-project`} class="header-cta">
+        <span>Start a Project</span>
+      </a>
+
+      <button
+        type="button"
+        class="mobile-menu-toggle"
+        id="mobile-menu-btn"
+        aria-expanded="false"
+        aria-controls="mobile-nav-drawer"
+        aria-label="Toggle navigation menu"
+      >
+        <span class="toggle-bar bar-1" aria-hidden="true"></span>
+        <span class="toggle-bar bar-2" aria-hidden="true"></span>
+        <span class="toggle-bar bar-3" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-drawer" id="mobile-nav-drawer" hidden>
+    <nav class="container mobile-nav" aria-label="Mobile story navigation">
+      <ul class="mobile-nav-list" role="list">
+        {
+          primaryNavItems.map((item, index) => (
+            <li>
+              <a
+                href={`${prefix}${item.href}`}
+                data-nav-target={item.id}
+                class:list={["mobile-nav-link", { "is-active": isHome && index === 0 }]}
+              >
+                <span>{item.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mobile-drawer-footer">
+        <a href={`${prefix}#start-a-project`} class="mobile-cta-btn">
+          Start a Project
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  function initMobileNav() {
+    const toggleBtn = document.getElementById("mobile-menu-btn") as HTMLButtonElement | null;
+    const drawer = document.getElementById("mobile-nav-drawer") as HTMLElement | null;
+    if (!toggleBtn || !drawer) return;
+
+    const closeMenu = (restoreFocus = false) => {
+      toggleBtn.setAttribute("aria-expanded", "false");
+      drawer.hidden = true;
+      document.body.classList.remove("mobile-nav-open");
+      if (restoreFocus) {
+        toggleBtn.focus();
+      }
+    };
+
+    const openMenu = () => {
+      toggleBtn.setAttribute("aria-expanded", "true");
+      drawer.hidden = false;
+      document.body.classList.add("mobile-nav-open");
+    };
+
+    toggleBtn.addEventListener("click", () => {
+      const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
+      if (isExpanded) {
+        closeMenu(false);
+      } else {
+        openMenu();
+      }
+    });
+
+    drawer.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => closeMenu(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && toggleBtn.getAttribute("aria-expanded") === "true") {
+        closeMenu(true);
+      }
+    });
+  }
+
+  initMobileNav();
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background-color: rgba(243, 245, 244, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    min-height: 4.5rem;
+  }
+
+  .brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--color-navy-deep);
+  }
+
+  .brand-mark {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-heavy);
+    letter-spacing: var(--tracking-industrial);
+    color: var(--color-navy-deep);
+  }
+
+  .brand-sub {
+    font-size: 0.72rem;
+    font-weight: var(--weight-medium);
+    color: var(--color-slate-muted);
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: var(--weight-semibold);
+    color: var(--color-slate);
+    text-decoration: none;
+    padding: 0.42rem 0.85rem;
+    border-radius: var(--radius-xs);
+    transition: color var(--duration-fast) var(--ease-standard),
+      background-color var(--duration-fast) var(--ease-standard);
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    color: var(--color-navy-deep);
+    background-color: var(--color-silver);
+  }
+
+  .nav-link.is-active {
+    color: var(--color-navy-deep);
+    background-color: rgba(228, 119, 50, 0.14);
+    box-shadow: inset 0 -2px 0 0 var(--color-orange-primary);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .skip-journey-btn {
+    display: none;
+    align-items: center;
+    padding: 0.48rem 0.85rem;
+    font-size: 0.78rem;
+    font-weight: var(--weight-semibold);
+    color: var(--color-slate);
+    background-color: var(--surface-white);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-xs);
+    text-decoration: none;
+  }
+
+  .skip-journey-btn:hover {
+    color: var(--color-navy-deep);
+    border-color: var(--color-orange-primary);
+  }
+
+  .header-cta {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0.52rem 1.1rem;
+    background-color: var(--color-navy-deep);
+    color: var(--color-mist-white);
+    font-size: 0.82rem;
+    font-weight: var(--weight-bold);
+    text-decoration: none;
+    border-radius: var(--radius-xs);
+    border-left: 3px solid var(--color-orange-primary);
+    box-shadow: var(--shadow-xs);
+    transition: background-color var(--duration-fast) var(--ease-standard);
+  }
+
+  .header-cta:hover {
+    background-color: var(--color-orange-primary);
+    color: var(--color-white);
+  }
+
+  .mobile-menu-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 2.65rem;
+    height: 2.65rem;
+    background-color: var(--surface-white);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-xs);
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .toggle-bar {
+    display: block;
+    width: 1.25rem;
+    height: 2px;
+    background-color: var(--color-navy-deep);
+    transition: transform var(--duration-fast) var(--ease-standard),
+      opacity var(--duration-fast) var(--ease-standard);
+  }
+
+  .mobile-menu-toggle[aria-expanded="true"] .bar-1 {
+    transform: translateY(7px) rotate(45deg);
+    background-color: var(--color-orange-primary);
+  }
+
+  .mobile-menu-toggle[aria-expanded="true"] .bar-2 {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle[aria-expanded="true"] .bar-3 {
+    transform: translateY(-7px) rotate(-45deg);
+    background-color: var(--color-orange-primary);
+  }
+
+  .mobile-drawer {
+    background-color: var(--color-mist-white);
+    border-bottom: 2px solid var(--color-orange-primary);
+    padding-block: var(--space-md) var(--space-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    color: var(--color-navy-deep);
+    text-decoration: none;
+    border-radius: var(--radius-xs);
+  }
+
+  .mobile-nav-link.is-active,
+  .mobile-nav-link:hover {
+    background-color: var(--color-silver);
+    color: var(--color-orange-active);
+  }
+
+  .mobile-drawer-footer {
+    margin-top: var(--space-md);
+  }
+
+  .mobile-cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--color-navy-deep);
+    color: var(--color-mist-white);
+    font-weight: var(--weight-bold);
+    text-decoration: none;
+    border-radius: var(--radius-xs);
+    border-left: 3px solid var(--color-orange-primary);
+  }
+
+  @media (min-width: 64rem) {
+    .desktop-nav {
+      display: block;
+    }
+
+    .skip-journey-btn,
+    .header-cta {
+      display: inline-flex;
+    }
+
+    .mobile-menu-toggle,
+    .mobile-drawer {
+      display: none !important;
+    }
+  }
+</style>

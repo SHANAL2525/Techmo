@@ -1,0 +1,282 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+---
+
+<section
+  id="contact-cta"
+  class="contact-cta-section"
+  aria-labelledby="contact-cta-heading"
+>
+  <div class="container contact-cta-box">
+    <div class="cta-main-col">
+      <SectionHeading
+        eyebrow="Start Your Project"
+        title="Ready to Plan Your Next Structure?"
+        description="Whether you are planning an industrial warehouse, factory roof upgrade, custom steel canopy or modern A-Frame project in Sri Lanka, our engineering team is ready to guide you from initial design to handover."
+        headingId="contact-cta-heading"
+        accentTone="warm"
+      />
+
+      <div class="checklist-card">
+        <h3 class="h6 checklist-title">
+          Helpful Details to Share for Your Consultation:
+        </h3>
+        <ul class="checklist-grid" role="list">
+          <li>
+            <span class="check-dot" aria-hidden="true">1</span>
+            <span>Project Type (Steel Building, Roofing/Fabrication, or A-Frame)</span>
+          </li>
+          <li>
+            <span class="check-dot" aria-hidden="true">2</span>
+            <span>Approximate Building Size, Span &amp; Height Requirements</span>
+          </li>
+          <li>
+            <span class="check-dot" aria-hidden="true">3</span>
+            <span>Site Location &amp; Terrain in Sri Lanka</span>
+          </li>
+          <li>
+            <span class="check-dot" aria-hidden="true">4</span>
+            <span>Preferred Timeline &amp; Any Existing Drawings</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <aside class="cta-dispatch-panel" aria-label="Consultation channels">
+      <div class="dispatch-header">
+        <span>TECHMO Engineering Desk</span>
+        <span class="dispatch-tag">Sri Lanka</span>
+      </div>
+
+      <div class="dispatch-body">
+        <p class="dispatch-note">
+          Direct telephone, WhatsApp consultation and official email details
+          will be activated in the production launch once verified business
+          contact credentials are confirmed.
+        </p>
+
+        <div class="channel-placeholders">
+          <div class="channel-row">
+            <span class="channel-label">Phone &amp; WhatsApp</span>
+            <span class="channel-val">Verified Number Pending</span>
+          </div>
+          <div class="channel-row">
+            <span class="channel-label">Project Inquiries</span>
+            <span class="channel-val">Verified Email Pending</span>
+          </div>
+          <div class="channel-row">
+            <span class="channel-label">Service Coverage</span>
+            <span class="channel-val">Islandwide across Sri Lanka</span>
+          </div>
+        </div>
+
+        <div class="dispatch-actions">
+          <a href="#crane-showcase" class="dispatch-btn-primary">
+            <span>Explore Our Divisions</span>
+            <span aria-hidden="true">&uarr;</span>
+          </a>
+          <a href="#project-gallery" class="dispatch-btn-secondary">
+            <span>View Concept Gallery</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .contact-cta-section {
+    padding-block: var(--space-3xl);
+    background-color: var(--surface-white);
+  }
+
+  .contact-cta-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+    background: linear-gradient(
+      135deg,
+      var(--surface-warm-cream) 0%,
+      var(--surface-white) 60%,
+      var(--surface-soft-sky) 100%
+    );
+    border: 1px solid var(--border-warm);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-md);
+  }
+
+  .cta-main-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .checklist-card {
+    background-color: var(--surface-white);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .checklist-title {
+    margin-bottom: var(--space-md);
+    color: var(--color-navy-deep);
+  }
+
+  .checklist-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .checklist-grid li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--color-slate);
+  }
+
+  .check-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    color: var(--color-white);
+    background-color: var(--color-orange-primary);
+    border-radius: var(--radius-pill);
+    flex-shrink: 0;
+  }
+
+  .cta-dispatch-panel {
+    background-color: var(--surface-white);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .dispatch-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    background-color: var(--color-navy-deep);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    color: var(--color-white);
+  }
+
+  .dispatch-tag {
+    padding: 0.2rem 0.65rem;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #FDBA74;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-xs);
+  }
+
+  .dispatch-body {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .dispatch-note {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-slate);
+  }
+
+  .channel-placeholders {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .channel-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--surface-light-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+  }
+
+  .channel-label {
+    color: var(--color-slate-muted);
+    font-weight: var(--weight-medium);
+  }
+
+  .channel-val {
+    color: var(--color-navy-deep);
+    font-weight: var(--weight-bold);
+  }
+
+  .dispatch-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .dispatch-btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: 0.85rem 1.2rem;
+    background-color: var(--color-orange-primary);
+    color: var(--color-white);
+    font-weight: var(--weight-bold);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .dispatch-btn-primary:hover {
+    background-color: var(--color-orange-hover);
+    color: var(--color-white);
+  }
+
+  .dispatch-btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    background-color: var(--surface-light-bg);
+    color: var(--color-navy-deep);
+    border: 1px solid var(--border-strong);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+  }
+
+  .dispatch-btn-secondary:hover {
+    border-color: var(--color-orange-primary);
+    color: var(--color-orange-active);
+  }
+
+  @media (min-width: 62rem) {
+    .contact-cta-box {
+      grid-template-columns: 1.25fr 0.95fr;
+    }
+
+    .checklist-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

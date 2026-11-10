@@ -1,0 +1,196 @@
+---
+import { footerQuickLinks } from "../../data/navigation";
+import { serviceDivisions } from "../../data/services";
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-grid">
+    <div class="footer-brand-col">
+      <a href="#top" class="footer-brand">
+        <span class="footer-wordmark">TECHMO</span>
+        <span class="footer-tag">Engineering &amp; Steel Building Solutions • Sri Lanka</span>
+      </a>
+      <p class="footer-summary">
+        TECHMO is a Sri Lankan engineering, construction and steel building
+        solutions company specializing in industrial steel structures, custom
+        fabrication, weather-resilient roofing and modern A-Frame builds.
+      </p>
+      <div class="prototype-status">
+        <span class="status-indicator" aria-hidden="true"></span>
+        <span class="text-small">
+          Architectural Digital Prototype — Verified Contact Details &amp; Site Photography Pending
+        </span>
+      </div>
+    </div>
+
+    <nav class="footer-nav-col" aria-label="Footer section links">
+      <h2 class="h6 footer-heading">Construction Journey</h2>
+      <ul class="footer-links" role="list">
+        {
+          footerQuickLinks.map((item) => (
+            <li>
+              <a href={item.href} class="footer-link">
+                <span>{item.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="footer-divisions-col">
+      <h2 class="h6 footer-heading">Engineering Divisions</h2>
+      <ul class="footer-links" role="list">
+        {
+          serviceDivisions.map((div) => (
+            <li>
+              <a href={`#${div.sectionId}`} class="footer-link">
+                <span>{div.title}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p class="text-small footer-copy">
+        &copy; {new Date().getFullYear()} TECHMO Engineering &amp; Construction (Sri Lanka). All rights reserved.
+      </p>
+      <a href="#top" class="back-to-top text-small">
+        Back to top &uarr;
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-navy-deep);
+    color: var(--color-silver);
+    border-top: 3px solid var(--color-orange-primary);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    padding-block: var(--space-2xl);
+  }
+
+  .footer-brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    text-decoration: none;
+  }
+
+  .footer-wordmark {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-heavy);
+    letter-spacing: var(--tracking-industrial);
+    color: var(--color-mist-white);
+    border-left: 4px solid var(--color-orange-primary);
+    padding-left: var(--space-sm);
+    line-height: 1;
+  }
+
+  .footer-tag {
+    font-size: var(--text-xs);
+    color: var(--color-sage-green);
+    font-weight: var(--weight-medium);
+  }
+
+  .footer-summary {
+    margin: 0;
+    color: var(--color-silver);
+    font-size: var(--text-sm);
+    max-width: 46ch;
+  }
+
+  .prototype-status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0.45rem 0.85rem;
+    background-color: rgba(243, 245, 244, 0.06);
+    border: 1px solid rgba(220, 230, 235, 0.16);
+    border-radius: var(--radius-xs);
+    color: var(--color-silver);
+    max-width: fit-content;
+  }
+
+  .status-indicator {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-orange-primary);
+    flex-shrink: 0;
+  }
+
+  .footer-heading {
+    margin-bottom: var(--space-md);
+    color: var(--color-mist-white);
+  }
+
+  .footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: var(--text-sm);
+    color: var(--color-silver);
+    padding-block: 0.2rem;
+  }
+
+  .footer-link:hover {
+    color: var(--color-orange-primary);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(220, 230, 235, 0.12);
+    padding-block: var(--space-md);
+  }
+
+  .footer-bottom-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .footer-copy {
+    margin: 0;
+    color: #9FB0BC;
+  }
+
+  .back-to-top {
+    color: var(--color-orange-primary);
+    text-decoration: none;
+    font-weight: var(--weight-semibold);
+  }
+
+  @media (min-width: 52rem) {
+    .footer-grid {
+      grid-template-columns: 1.6fr 1fr 1.2fr;
+    }
+  }
+</style>

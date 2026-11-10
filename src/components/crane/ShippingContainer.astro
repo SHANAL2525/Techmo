@@ -1,0 +1,383 @@
+---
+import { serviceDivisions } from "../../data/services";
+
+const cardTones = ["tone-warm", "tone-sky", "tone-mint"];
+---
+
+<div id="crane-container" class="shipping-container">
+  <!-- Refined Top Frame Bar -->
+  <div class="container-top-rail" aria-hidden="true">
+    <span class="corner-latch"></span>
+    <span class="rail-id">TECHMO — Modular Service Showcase</span>
+    <span class="corner-latch"></span>
+  </div>
+
+  <div class="container-body">
+    <!-- Interior Real HTML Service Content (Crawlable, Light & Scannable) -->
+    <div id="container-interior-content" class="container-interior">
+      <div class="interior-header">
+        <div>
+          <p class="text-eyebrow interior-eyebrow">What We Build</p>
+          <h3 class="h3 interior-title">
+            Three Core Engineering Divisions
+          </h3>
+        </div>
+        <span class="payload-status" id="container-payload-badge">
+          Ready to Explore
+        </span>
+      </div>
+
+      <div class="interior-grid">
+        {
+          serviceDivisions.map((division, idx) => (
+            <article class:list={["bay-card", cardTones[idx % cardTones.length]]}>
+              <div class="bay-card-top">
+                <span class="bay-pill">{division.eyebrow}</span>
+              </div>
+              <h4 class="h4 bay-title">{division.title}</h4>
+              <p class="bay-summary">{division.shortDescription}</p>
+              <ul class="bay-highlights" role="list">
+                {division.capabilities.slice(0, 3).map((cap) => (
+                  <li>{cap}</li>
+                ))}
+              </ul>
+              <a href={`#${division.sectionId}`} class="bay-link">
+                <span>Explore {division.title}</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Left Hinged Refined Orange Container Door -->
+    <div
+      id="container-door-left"
+      class="container-door door-left"
+      aria-hidden="true"
+    >
+      <div class="door-surface">
+        <div class="door-badge">
+          <span class="door-brand">TECHMO</span>
+          <span class="door-sub">Engineering &amp; Steel Solutions</span>
+        </div>
+        <div class="locking-rod rod-1"></div>
+      </div>
+    </div>
+
+    <!-- Right Hinged Refined Orange Container Door -->
+    <div
+      id="container-door-right"
+      class="container-door door-right"
+      aria-hidden="true"
+    >
+      <div class="door-surface">
+        <div class="locking-rod rod-1"></div>
+        <div class="door-badge badge-right">
+          <span class="door-spec">Scroll to Open</span>
+          <span class="door-sub">Discover Our Building Systems</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Refined Bottom Sill Beam -->
+  <div class="container-bottom-rail" aria-hidden="true">
+    <span class="sill-slot"></span>
+    <span class="bottom-stamp">Engineered for Sri Lanka</span>
+    <span class="sill-slot"></span>
+  </div>
+</div>
+
+<style>
+  .shipping-container {
+    position: relative;
+    width: 100%;
+    max-width: 64rem;
+    margin-inline: auto;
+    border: 2px solid var(--color-orange-primary);
+    border-radius: var(--radius-md);
+    background-color: var(--surface-white);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    will-change: transform;
+  }
+
+  .container-top-rail,
+  .container-bottom-rail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.45rem var(--space-md);
+    background-color: var(--color-navy-deep);
+    color: var(--color-white);
+    font-size: 0.78rem;
+    font-weight: var(--weight-semibold);
+  }
+
+  .corner-latch {
+    width: 1.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-orange-primary);
+  }
+
+  .sill-slot {
+    width: 2.5rem;
+    height: 0.4rem;
+    border-radius: var(--radius-pill);
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .container-body {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--surface-white);
+  }
+
+  .container-interior {
+    position: relative;
+    z-index: var(--z-container-content);
+    padding: var(--space-lg) var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    will-change: transform, opacity;
+  }
+
+  .interior-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .interior-eyebrow {
+    margin-bottom: 0.2rem;
+  }
+
+  .interior-title {
+    margin: 0;
+    color: var(--color-navy-deep);
+  }
+
+  .payload-status {
+    padding: 0.3rem 0.85rem;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    background-color: var(--surface-warm-cream);
+    color: var(--color-orange-active);
+    border: 1px solid var(--border-warm);
+    border-radius: var(--radius-pill);
+  }
+
+  .interior-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .bay-card {
+    background-color: var(--surface-light-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    transition: transform var(--duration-fast) var(--ease-standard),
+      box-shadow var(--duration-fast) var(--ease-standard);
+  }
+
+  .bay-card.tone-warm {
+    background-color: var(--surface-warm-cream);
+    border-color: var(--border-warm);
+  }
+
+  .bay-card.tone-sky {
+    background-color: var(--surface-soft-sky);
+    border-color: var(--border-sky);
+  }
+
+  .bay-card.tone-mint {
+    background-color: var(--surface-soft-mint);
+    border-color: var(--border-mint);
+  }
+
+  .bay-card-top {
+    display: flex;
+    align-items: center;
+  }
+
+  .bay-pill {
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    background-color: var(--surface-white);
+    color: var(--color-navy-deep);
+    font-size: 0.75rem;
+    font-weight: var(--weight-bold);
+    border-radius: var(--radius-pill);
+  }
+
+  .bay-title {
+    margin: 0;
+    color: var(--color-navy-deep);
+    font-size: var(--text-lg);
+  }
+
+  .bay-summary {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-slate);
+  }
+
+  .bay-highlights {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: var(--text-xs);
+    color: var(--color-slate);
+    flex-grow: 1;
+  }
+
+  .bay-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+    padding-top: var(--space-xs);
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    color: var(--color-navy-deep);
+    text-decoration: none;
+  }
+
+  .bay-link:hover {
+    color: var(--color-orange-active);
+  }
+
+  /* Refined Hinged Container Doors */
+  .container-door {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50.2%;
+    z-index: var(--z-container-doors);
+    background-color: var(--color-orange-primary);
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.06) 0px,
+      rgba(255, 255, 255, 0.06) 22px,
+      rgba(15, 23, 42, 0.05) 22px,
+      rgba(15, 23, 42, 0.05) 44px
+    );
+    will-change: transform, opacity;
+    pointer-events: none;
+  }
+
+  .door-left {
+    left: 0;
+    transform-origin: left center;
+    border-right: 2px solid var(--color-navy-deep);
+  }
+
+  .door-right {
+    right: 0;
+    transform-origin: right center;
+    border-left: 2px solid var(--color-navy-deep);
+  }
+
+  .door-surface {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .door-badge {
+    background-color: var(--surface-white);
+    color: var(--color-navy-deep);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    max-width: 16rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .badge-right {
+    align-self: flex-end;
+    margin-top: auto;
+  }
+
+  .door-brand {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-heavy);
+    letter-spacing: var(--tracking-industrial);
+    color: var(--color-navy-deep);
+  }
+
+  .door-spec {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    color: var(--color-orange-active);
+  }
+
+  .door-sub {
+    font-size: 0.78rem;
+    color: var(--color-slate);
+  }
+
+  .locking-rod {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: rgba(15, 23, 42, 0.28);
+  }
+
+  .door-left .rod-1 {
+    right: 20px;
+  }
+
+  .door-right .rod-1 {
+    left: 20px;
+  }
+
+  /* Static / Reduced Motion / Manual Open State */
+  :global(.crane-showcase.is-open-static) .door-left,
+  :global(.crane-showcase.is-open-static) .door-right {
+    transform: scaleX(0.02);
+    opacity: 0.12;
+  }
+
+  @media (min-width: 58rem) {
+    .interior-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 47.99rem), (prefers-reduced-motion: reduce) {
+    .door-left,
+    .door-right {
+      transform: scaleX(0.02) !important;
+      opacity: 0.1 !important;
+    }
+
+    .container-interior {
+      padding: var(--space-md);
+    }
+  }
+</style>

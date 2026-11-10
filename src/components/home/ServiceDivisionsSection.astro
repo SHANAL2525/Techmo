@@ -1,0 +1,246 @@
+---
+import { serviceDivisions } from "../../data/services";
+import SectionHeading from "../ui/SectionHeading.astro";
+import ServiceBlueprintSvg from "../ui/ServiceBlueprintSvg.astro";
+
+const tones: Array<"warm" | "sky" | "mint"> = ["warm", "sky", "mint"];
+---
+
+<div class="service-divisions-wrapper">
+  {
+    serviceDivisions.map((division, index) => {
+      const headingId = `${division.sectionId}-heading`;
+      const isReversed = index % 2 === 1;
+      const accentTone = tones[index % tones.length];
+      return (
+        <section
+          id={division.sectionId}
+          class:list={[
+            "division-section",
+            `section-tone-${accentTone}`,
+            { "division-alt": isReversed },
+          ]}
+          aria-labelledby={headingId}
+        >
+          <div class="container division-layout">
+            <div class="division-copy">
+              <SectionHeading
+                code={`0${index + 1}`}
+                eyebrow={division.eyebrow}
+                title={division.title}
+                description={division.fullDescription}
+                headingId={headingId}
+                accentTone={accentTone}
+              />
+
+              <div class="capabilities-panel">
+                <h3 class="h6 panel-title">
+                  What We Deliver
+                </h3>
+                <ul class="capabilities-list" role="list">
+                  {division.capabilities.map((item) => (
+                    <li class="capability-item">
+                      <span class="cap-marker" aria-hidden="true">
+                        &#10003;
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="applications-row">
+                <span class="app-label">Ideal For:</span>
+                <ul class="app-tags" role="list">
+                  {division.applications.map((app) => (
+                    <li class="app-tag">{app}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="division-cta-row">
+                <a href="#contact-cta" class="division-cta-btn">
+                  <span>Discuss a {division.title} Project</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="division-schematic">
+              <ServiceBlueprintSvg
+                variant={division.blueprintType}
+                title={division.title}
+                specTag={division.specTag}
+              />
+            </div>
+          </div>
+        </section>
+      );
+    })
+  }
+</div>
+
+<style>
+  .division-section {
+    padding-block: var(--space-3xl);
+    border-bottom: 1px solid var(--border-subtle);
+    background-color: var(--surface-white);
+  }
+
+  .division-section.section-tone-sky {
+    background-color: var(--surface-light-bg);
+  }
+
+  .division-section.section-tone-mint {
+    background-color: var(--surface-white);
+  }
+
+  .division-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .division-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .capabilities-panel {
+    background-color: var(--surface-light-bg);
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--color-orange-primary);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .section-tone-sky .capabilities-panel {
+    background-color: var(--surface-white);
+    border-left-color: #0284C7;
+  }
+
+  .section-tone-mint .capabilities-panel {
+    background-color: var(--surface-light-bg);
+    border-left-color: #059669;
+  }
+
+  .panel-title {
+    margin-bottom: var(--space-sm);
+    color: var(--color-navy-deep);
+  }
+
+  .capabilities-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .capability-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--color-slate);
+  }
+
+  .cap-marker {
+    font-weight: var(--weight-bold);
+    color: var(--color-orange-primary);
+    flex-shrink: 0;
+  }
+
+  .section-tone-sky .cap-marker {
+    color: #0284C7;
+  }
+
+  .section-tone-mint .cap-marker {
+    color: #059669;
+  }
+
+  .applications-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .app-label {
+    font-size: var(--text-xs);
+    color: var(--color-slate-muted);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .app-tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .app-tag {
+    padding: 0.35rem 0.85rem;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    background-color: var(--surface-warm-cream);
+    border: 1px solid var(--border-warm);
+    color: var(--color-navy-deep);
+    border-radius: var(--radius-pill);
+  }
+
+  .section-tone-sky .app-tag {
+    background-color: var(--surface-soft-sky);
+    border-color: var(--border-sky);
+  }
+
+  .section-tone-mint .app-tag {
+    background-color: var(--surface-soft-mint);
+    border-color: var(--border-mint);
+  }
+
+  .division-cta-row {
+    padding-top: var(--space-2xs);
+  }
+
+  .division-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0.85rem 1.4rem;
+    background-color: var(--color-navy-deep);
+    color: var(--color-white);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-xs);
+    transition: background-color var(--duration-fast) var(--ease-standard);
+  }
+
+  .division-cta-btn:hover {
+    background-color: var(--color-orange-primary);
+    color: var(--color-white);
+  }
+
+  @media (min-width: 62rem) {
+    .division-layout {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+
+    .division-section.division-alt .division-copy {
+      order: 2;
+    }
+
+    .division-section.division-alt .division-schematic {
+      order: 1;
+    }
+  }
+</style>

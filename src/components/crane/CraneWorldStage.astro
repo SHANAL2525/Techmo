@@ -1,0 +1,901 @@
+---
+---
+
+<div class="crane-world-canvas" id="crane-world-stage" aria-hidden="true">
+  <svg
+    viewBox="0 0 1440 820"
+    preserveAspectRatio="xMidYMid slice"
+    class="world-cinematic-svg"
+  >
+    <defs>
+      <!-- Natural Architectural Daylight Sky -->
+      <linearGradient id="sky-atmosphere" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#C4D4DE" />
+        <stop offset="48%" stop-color="#DCE6EB" />
+        <stop offset="86%" stop-color="#EDF1F2" />
+        <stop offset="100%" stop-color="#F3F5F4" />
+      </linearGradient>
+
+      <!-- Atmospheric Horizon Mist -->
+      <linearGradient id="horizon-haze" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F3F5F4" stop-opacity="0" />
+        <stop offset="65%" stop-color="#F3F5F4" stop-opacity="0.65" />
+        <stop offset="100%" stop-color="#DCE6EB" stop-opacity="0.9" />
+      </linearGradient>
+
+      <!-- Distant Sage Mountain Ridges -->
+      <linearGradient id="sage-ridge-far" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#B6C9C0" />
+        <stop offset="100%" stop-color="#DCE6EB" />
+      </linearGradient>
+
+      <linearGradient id="sage-ridge-Mid" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#96B0A4" />
+        <stop offset="100%" stop-color="#C8D6D0" />
+      </linearGradient>
+
+      <!-- Engineered Ground Plane & Concrete Grade -->
+      <linearGradient id="ground-grade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#D2DDE2" />
+        <stop offset="22%" stop-color="#C0CED5" />
+        <stop offset="100%" stop-color="#9BAAB3" />
+      </linearGradient>
+
+      <linearGradient id="concrete-foundation" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#BCC8CE" />
+        <stop offset="35%" stop-color="#8E9DA6" />
+        <stop offset="100%" stop-color="#586770" />
+      </linearGradient>
+
+      <!-- 3D-Shaded Steel Navy Structural Gradient -->
+      <linearGradient id="steel-navy-3d" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#0E151C" />
+        <stop offset="28%" stop-color="#263646" />
+        <stop offset="55%" stop-color="#17212B" />
+        <stop offset="100%" stop-color="#0B1015" />
+      </linearGradient>
+
+      <linearGradient id="steel-jib-vertical" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2B3C4D" />
+        <stop offset="45%" stop-color="#17212B" />
+        <stop offset="100%" stop-color="#0B1117" />
+      </linearGradient>
+
+      <!-- Metallic Silver / Galvanized Steel -->
+      <linearGradient id="metallic-silver" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F3F5F4" />
+        <stop offset="45%" stop-color="#C5D3DA" />
+        <stop offset="100%" stop-color="#7F919C" />
+      </linearGradient>
+
+      <!-- 3D Copper Orange Metallic Surface -->
+      <linearGradient id="copper-orange-3d" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F08B49" />
+        <stop offset="35%" stop-color="#E47732" />
+        <stop offset="85%" stop-color="#BD591B" />
+        <stop offset="100%" stop-color="#8F3F0D" />
+      </linearGradient>
+
+      <!-- 3D Corrugated Steel Rib Pattern for Shipping Container -->
+      <pattern
+        id="corrugated-copper"
+        width="16"
+        height="102"
+        patternUnits="userSpaceOnUse"
+      >
+        <rect x="0" y="0" width="5" height="102" fill="#E47732" />
+        <rect x="5" y="0" width="3" height="102" fill="#F19153" />
+        <rect x="8" y="0" width="5" height="102" fill="#C45E1E" />
+        <rect x="13" y="0" width="3" height="102" fill="#9E4610" />
+      </pattern>
+
+      <!-- Architectural Curtain-Wall Reflective Glazing -->
+      <linearGradient id="curtain-glass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#263847" />
+        <stop offset="38%" stop-color="#4B6678" />
+        <stop offset="52%" stop-color="#8CA4B3" />
+        <stop offset="68%" stop-color="#354B5B" />
+        <stop offset="100%" stop-color="#17212B" />
+      </linearGradient>
+
+      <!-- Warm Architectural Interior Downlight -->
+      <linearGradient id="interior-tungsten" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#E47732" stop-opacity="0.55" />
+        <stop offset="45%" stop-color="#F4C295" stop-opacity="0.45" />
+        <stop offset="100%" stop-color="#DCE6EB" stop-opacity="0.2" />
+      </linearGradient>
+
+      <!-- Ambient Occlusion Ground Shadow -->
+      <radialGradient id="ao-shadow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#17212B" stop-opacity="0.42" />
+        <stop offset="65%" stop-color="#17212B" stop-opacity="0.14" />
+        <stop offset="100%" stop-color="#17212B" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+
+    <!-- Full-Bleed Architectural Daylight Sky -->
+    <rect width="1440" height="820" fill="url(#sky-atmosphere)" />
+
+    <!-- ===================================================================
+         MASTER CAMERA GROUP (Controlled by Scroll Progress)
+         =================================================================== -->
+    <g id="world-camera" class="camera-rig">
+      <!-- PARALLAX LAYER 1: Atmospheric Horizon & Distant Terrain -->
+      <g id="parallax-distant" class="parallax-layer">
+        <!-- Subtle Atmospheric Daylight Glow (Upper Right) -->
+        <ellipse
+          cx="1140"
+          cy="140"
+          rx="340"
+          ry="140"
+          fill="#F3F5F4"
+          opacity="0.55"
+        />
+
+        <!-- Distant Layered Sage/Slate Mountain Contours -->
+        <path
+          d="M -120 620 L 90 548 L 240 572 L 430 524 L 610 562 L 820 518 L 1040 558 L 1260 512 L 1560 565 L 1560 660 L -120 660 Z"
+          fill="url(#sage-ridge-far)"
+          opacity="0.7"
+        />
+        <path
+          d="M -120 632 L 160 582 L 350 602 L 580 558 L 790 594 L 1060 552 L 1310 585 L 1560 568 L 1560 665 L -120 665 Z"
+          fill="url(#sage-ridge-Mid)"
+          opacity="0.65"
+        />
+
+        <!-- Distant Horizon Mist Veil -->
+        <rect x="-120" y="540" width="1680" height="110" fill="url(#horizon-haze)" />
+      </g>
+
+      <!-- PARALLAX LAYER 2: Engineered Construction Site, 3D Crane & Structures -->
+      <g id="parallax-site" class="parallax-layer">
+        <!-- Main Engineered Ground Plane with Perspective Civil Grid -->
+        <rect x="-120" y="636" width="1680" height="210" fill="url(#ground-grade)" />
+        <line x1="-120" y1="636" x2="1560" y2="636" stroke="#8596A0" stroke-width="1.5" />
+        <line x1="-120" y1="664" x2="1560" y2="664" stroke="#B4C3CB" stroke-width="1" />
+        <line x1="-120" y1="704" x2="1560" y2="704" stroke="#A6B7C0" stroke-width="1" />
+        <line x1="-120" y1="760" x2="1560" y2="760" stroke="#93A5AF" stroke-width="1" />
+
+        <!-- Subtle Perspective Datum Lines on Ground -->
+        <line x1="200" y1="636" x2="40" y2="820" stroke="#B0C0C8" stroke-width="1" opacity="0.6" />
+        <line x1="500" y1="636" x2="420" y2="820" stroke="#B0C0C8" stroke-width="1" opacity="0.6" />
+        <line x1="800" y1="636" x2="820" y2="820" stroke="#B0C0C8" stroke-width="1" opacity="0.6" />
+        <line x1="1100" y1="636" x2="1220" y2="820" stroke="#B0C0C8" stroke-width="1" opacity="0.6" />
+
+        <!-- Left Supply & Container Staging Plinth (3D Beveled Concrete) -->
+        <g id="site-staging-plinth">
+          <ellipse cx="350" cy="642" rx="165" ry="14" fill="url(#ao-shadow)" />
+          <polygon
+            points="210,638 224,622 476,622 490,638"
+            fill="#DCE6EB"
+            stroke="#7F919C"
+            stroke-width="1"
+          />
+          <rect
+            x="210"
+            y="638"
+            width="280"
+            height="12"
+            fill="url(#concrete-foundation)"
+          />
+          <!-- Steel Bearing Rails -->
+          <rect x="242" y="618" width="216" height="4" fill="#17212B" />
+          <rect x="250" y="615" width="18" height="3" fill="#E47732" />
+          <rect x="432" y="615" width="18" height="3" fill="#E47732" />
+        </g>
+
+        <!-- Center Main Building Concrete Foundation Pad (x=545..975, y=615) -->
+        <g id="site-foundation-pad">
+          <ellipse cx="760" cy="644" rx="245" ry="18" fill="url(#ao-shadow)" />
+          <!-- 3D Top Surface of Concrete Slab -->
+          <polygon
+            points="542,636 560,616 960,616 978,636"
+            fill="#DCE6EB"
+            stroke="#7F919C"
+            stroke-width="1"
+          />
+          <!-- Front Vertical Edge of Concrete Slab -->
+          <rect
+            x="542"
+            y="636"
+            width="436"
+            height="14"
+            fill="url(#concrete-foundation)"
+          />
+          <!-- Structural Concrete Pedestals & Anchor Bolt Plates -->
+          <g transform="translate(585, 610)">
+            <rect x="-16" y="0" width="32" height="8" fill="#586770" />
+            <rect x="-12" y="-4" width="24" height="4" fill="#17212B" />
+            <rect x="-8" y="-7" width="3" height="3" fill="#E47732" />
+            <rect x="5" y="-7" width="3" height="3" fill="#E47732" />
+          </g>
+          <g transform="translate(760, 610)">
+            <rect x="-16" y="0" width="32" height="8" fill="#586770" />
+            <rect x="-12" y="-4" width="24" height="4" fill="#17212B" />
+          </g>
+          <g transform="translate(935, 610)">
+            <rect x="-16" y="0" width="32" height="8" fill="#586770" />
+            <rect x="-12" y="-4" width="24" height="4" fill="#17212B" />
+            <rect x="-8" y="-7" width="3" height="3" fill="#E47732" />
+            <rect x="5" y="-7" width="3" height="3" fill="#E47732" />
+          </g>
+        </g>
+
+        <!-- Right Architectural Cantilevered Deck for Modern A-Frame (x=1010..1250) -->
+        <g id="site-aframe-deck">
+          <ellipse cx="1130" cy="642" rx="140" ry="14" fill="url(#ao-shadow)" />
+          <!-- Deep Steel Pier Columns -->
+          <rect x="1034" y="620" width="10" height="22" fill="url(#steel-navy-3d)" />
+          <rect x="1125" y="620" width="10" height="22" fill="url(#steel-navy-3d)" />
+          <rect x="1216" y="620" width="10" height="22" fill="url(#steel-navy-3d)" />
+          <!-- 3D Beveled Architectural Terrace Slab -->
+          <polygon
+            points="1006,614 1018,606 1242,606 1254,614"
+            fill="#DCE6EB"
+          />
+          <rect
+            x="1006"
+            y="614"
+            width="248"
+            height="8"
+            fill="url(#steel-jib-vertical)"
+          />
+          <rect x="1006" y="614" width="248" height="2" fill="#E47732" />
+        </g>
+
+        <!-- ===============================================================
+             3D-SHADED REALISTIC TOWER CRANE (Mast at x=132, Jib at y=96)
+             =============================================================== -->
+        <g id="crane-mast-and-jib">
+          <ellipse cx="132" cy="644" rx="68" ry="14" fill="url(#ao-shadow)" />
+
+          <!-- Heavy Cast-Concrete Crane Ballast Foundation -->
+          <polygon
+            points="84,626 96,612 168,612 180,626"
+            fill="#DCE6EB"
+          />
+          <rect
+            x="84"
+            y="626"
+            width="96"
+            height="18"
+            fill="url(#concrete-foundation)"
+          />
+          <rect x="104" y="604" width="56" height="10" fill="url(#steel-navy-3d)" />
+          <rect x="108" y="601" width="48" height="3" fill="#E47732" />
+
+          <!-- REAR LATTICE PLANE (Offset +9px right for realistic 3D depth) -->
+          <g opacity="0.52" transform="translate(9, -3)">
+            <line x1="114" y1="96" x2="114" y2="604" stroke="#0E151C" stroke-width="3" />
+            <line x1="150" y1="96" x2="150" y2="604" stroke="#0E151C" stroke-width="3" />
+            <path
+              d="M114 96 L150 132 L114 168 L150 204 L114 240 L150 276 L114 312 L150 348 L114 384 L150 420 L114 456 L150 492 L114 528 L150 564 L114 600"
+              fill="none"
+              stroke="#17212B"
+              stroke-width="1.6"
+            />
+          </g>
+
+          <!-- INTERNAL ACCESS LADDER & PLATFORMS -->
+          <line x1="128" y1="104" x2="128" y2="604" stroke="#5C6F7E" stroke-width="1" stroke-dasharray="3 3" />
+          <line x1="134" y1="104" x2="134" y2="604" stroke="#5C6F7E" stroke-width="1" />
+          <rect x="112" y="240" width="46" height="4" fill="#17212B" />
+          <rect x="112" y="384" width="46" height="4" fill="#17212B" />
+          <rect x="112" y="528" width="46" height="4" fill="#17212B" />
+
+          <!-- FRONT LATTICE PLANE (3D Shaded Main Mast Chords & Bracing) -->
+          <rect x="112" y="96" width="5" height="508" fill="url(#steel-navy-3d)" />
+          <rect x="147" y="96" width="5" height="508" fill="url(#steel-navy-3d)" />
+          <!-- Specular Highlight on Left Mast Chord -->
+          <line x1="113.5" y1="96" x2="113.5" y2="604" stroke="#5C6F7E" stroke-width="1" />
+
+          <!-- Horizontal Tie Struts & K-Bracing -->
+          <path
+            d="M114 132 H150 M114 168 H150 M114 204 H150 M114 240 H150 M114 276 H150 M114 312 H150 M114 348 H150 M114 384 H150 M114 420 H150 M114 456 H150 M114 492 H150 M114 528 H150 M114 564 H150"
+            stroke="#17212B"
+            stroke-width="2.2"
+          />
+          <path
+            d="M114 96 L150 132 L114 168 L150 204 L114 240 L150 276 L114 312 L150 348 L114 384 L150 420 L114 456 L150 492 L114 528 L150 564 L114 600"
+            fill="none"
+            stroke="#263646"
+            stroke-width="2.2"
+            stroke-linejoin="bevel"
+          />
+
+          <!-- Slewing Ring Turntable Assembly -->
+          <rect x="106" y="110" width="52" height="10" rx="2" fill="url(#steel-navy-3d)" />
+          <rect x="109" y="107" width="46" height="3" fill="#E47732" />
+
+          <!-- CATHEAD APEX TOWER & SUSPENSION PENDANT RODS -->
+          <polygon
+            points="114,94 132,26 150,94"
+            fill="none"
+            stroke="#17212B"
+            stroke-width="4"
+            stroke-linejoin="round"
+          />
+          <line x1="120" y1="70" x2="144" y2="70" stroke="#17212B" stroke-width="2.5" />
+          <line x1="125" y1="48" x2="139" y2="48" stroke="#17212B" stroke-width="2" />
+          <circle cx="132" cy="26" r="4.5" fill="#E47732" stroke="#17212B" stroke-width="1.5" />
+
+          <!-- High-Tensile Steel Pendant Stay Rods -->
+          <line x1="132" y1="26" x2="36" y2="90" stroke="#32414E" stroke-width="2" />
+          <line x1="132" y1="26" x2="460" y2="82" stroke="#32414E" stroke-width="1.8" />
+          <line x1="132" y1="26" x2="880" y2="82" stroke="#32414E" stroke-width="1.6" />
+          <line x1="132" y1="26" x2="1280" y2="82" stroke="#5C6F7E" stroke-width="1.4" />
+
+          <!-- COUNTER-JIB & CONCRETE BALLAST BLOCKS (Left of Mast) -->
+          <g id="crane-counter-jib">
+            <rect x="26" y="66" width="12" height="44" rx="1" fill="url(#concrete-foundation)" stroke="#17212B" stroke-width="1" />
+            <rect x="40" y="64" width="12" height="48" rx="1" fill="url(#concrete-foundation)" stroke="#17212B" stroke-width="1" />
+            <rect x="54" y="66" width="12" height="44" rx="1" fill="url(#concrete-foundation)" stroke="#17212B" stroke-width="1" />
+            <rect x="24" y="72" width="44" height="4" fill="#E47732" />
+          </g>
+
+          <!-- 3D TRIANGULAR LATTICE MAIN JIB BOOM (x=18..1360, y=80..108) -->
+          <!-- Top Compression Chord -->
+          <rect x="24" y="80" width="1330" height="4.5" fill="url(#steel-jib-vertical)" />
+          <!-- Diagonal Jib Lattice Webbing -->
+          <path
+            d="M30 104 L52 82 L74 104 L96 82 L118 104 L140 82 L162 104 L184 82 L206 104 L228 82 L250 104 L272 82 L294 104 L316 82 L338 104 L360 82 L382 104 L404 82 L426 104 L448 82 L470 104 L492 82 L514 104 L536 82 L558 104 L580 82 L602 104 L624 82 L646 104 L668 82 L690 104 L712 82 L734 104 L756 82 L778 104 L800 82 L822 104 L844 82 L866 104 L888 82 L910 104 L932 82 L954 104 L976 82 L998 104 L1020 82 L1042 104 L1064 82 L1086 104 L1108 82 L1130 104 L1152 82 L1174 104 L1196 82 L1218 104 L1240 82 L1262 104 L1284 82 L1306 104 L1328 82 L1350 104"
+            fill="none"
+            stroke="#263646"
+            stroke-width="2"
+            stroke-linejoin="bevel"
+          />
+          <!-- Lower Tension Chord & Trolley Runway Track -->
+          <rect x="18" y="102" width="1340" height="8" rx="1" fill="url(#steel-jib-vertical)" />
+          <!-- Copper Orange Brand Fascia Strip along Jib -->
+          <rect x="160" y="96" width="1194" height="4" fill="url(#copper-orange-3d)" />
+
+          <!-- PANORAMIC GLAZED OPERATOR CABIN -->
+          <g transform="translate(150, 110)">
+            <polygon
+              points="0,0 38,0 44,24 38,36 0,36"
+              fill="url(#steel-navy-3d)"
+              stroke="#0E151C"
+              stroke-width="1.5"
+            />
+            <polygon
+              points="5,5 34,5 39,22 34,30 5,30"
+              fill="url(#curtain-glass)"
+            />
+            <rect x="0" y="32" width="38" height="3" fill="#E47732" />
+          </g>
+        </g>
+
+        <!-- ===============================================================
+             PAYLOAD 1: 3D CORRUGATED STEEL SHIPPING CONTAINER
+             Anchor Point: Top-Center at (0, 0) in local group
+             =============================================================== -->
+        <g id="payload-container" class="rigged-payload">
+          <!-- Ground Contact Drop Shadow -->
+          <ellipse cx="0" cy="126" rx="132" ry="10" fill="url(#ao-shadow)" />
+
+          <!-- 3D Side Depth Extrusion (Right Isometric Edge) -->
+          <polygon
+            points="120,0 132,-7 132,115 120,124"
+            fill="#0E151C"
+          />
+          <polygon
+            points="-120,0 -108,-7 132,-7 120,0"
+            fill="#2B3C4D"
+          />
+
+          <!-- Main Container Structural Steel Frame (-120..120, 0..124) -->
+          <rect
+            x="-120"
+            y="0"
+            width="240"
+            height="124"
+            rx="3"
+            fill="#17212B"
+            stroke="#0E151C"
+            stroke-width="2.5"
+          />
+
+          <!-- Top Header Rail & ISO Corner Castings -->
+          <rect x="-120" y="0" width="240" height="18" fill="url(#steel-jib-vertical)" />
+          <rect x="-120" y="0" width="16" height="18" fill="#E47732" />
+          <rect x="104" y="0" width="16" height="18" fill="#E47732" />
+          <circle cx="-112" cy="9" r="2.5" fill="#17212B" />
+          <circle cx="112" cy="9" r="2.5" fill="#17212B" />
+          <text
+            x="0"
+            y="12.5"
+            text-anchor="middle"
+            fill="#DCE6EB"
+            font-family="system-ui, sans-serif"
+            font-weight="700"
+            font-size="8.5"
+            letter-spacing="1.2"
+          >
+            TECHMO // ISO-40HC STRUCTURAL MODULE
+          </text>
+
+          <!-- Interior Architectural Display Bays (Revealed when doors open) -->
+          <g id="container-interior-bays">
+            <!-- Recessed Dark Steel Interior Cavity -->
+            <rect x="-114" y="20" width="228" height="98" fill="#0F171E" />
+
+            <!-- Bay 1: Industrial Steel Portal Frame Model -->
+            <g transform="translate(-108, 25)">
+              <rect width="68" height="88" rx="3" fill="#1B2834" stroke="#32414E" stroke-width="1" />
+              <rect width="68" height="3" fill="#E47732" />
+              <path d="M12 68 L12 34 L34 22 L56 34 L56 68" fill="none" stroke="#DCE6EB" stroke-width="2.5" />
+              <path d="M18 68 L18 38 L34 29 L50 38 L50 68" fill="none" stroke="#E47732" stroke-width="1.5" />
+              <text x="34" y="81" text-anchor="middle" fill="#F3F5F4" font-weight="700" font-size="7.5" letter-spacing="0.5">
+                STEEL HALLS
+              </text>
+            </g>
+
+            <!-- Bay 2: Long-Span Roof Truss Model -->
+            <g transform="translate(-34, 25)">
+              <rect width="68" height="88" rx="3" fill="#1B2834" stroke="#32414E" stroke-width="1" />
+              <rect width="68" height="3" fill="#A8C1B5" />
+              <polygon points="8,58 34,28 60,58" fill="none" stroke="#DCE6EB" stroke-width="2" />
+              <line x1="21" y1="43" x2="21" y2="58" stroke="#E47732" stroke-width="1.5" />
+              <line x1="47" y1="43" x2="47" y2="58" stroke="#E47732" stroke-width="1.5" />
+              <line x1="34" y1="28" x2="34" y2="58" stroke="#DCE6EB" stroke-width="1.5" />
+              <text x="34" y="81" text-anchor="middle" fill="#F3F5F4" font-weight="700" font-size="7.5" letter-spacing="0.5">
+                ROOF SYSTEMS
+              </text>
+            </g>
+
+            <!-- Bay 3: Architectural A-Frame Model -->
+            <g transform="translate(40, 25)">
+              <rect width="68" height="88" rx="3" fill="#1B2834" stroke="#32414E" stroke-width="1" />
+              <rect width="68" height="3" fill="#DCE6EB" />
+              <polygon points="14,68 34,20 54,68" fill="none" stroke="#E47732" stroke-width="2.5" />
+              <line x1="22" y1="48" x2="46" y2="48" stroke="#DCE6EB" stroke-width="2" />
+              <text x="34" y="81" text-anchor="middle" fill="#F3F5F4" font-weight="700" font-size="7.5" letter-spacing="0.5">
+                A-FRAME BUILD
+              </text>
+            </g>
+          </g>
+
+          <!-- Left Hinged 3D Corrugated Copper-Orange Door (Hinge at x=-118) -->
+          <g id="container-door-left" class="door-left-hinge">
+            <rect
+              x="-118"
+              y="18"
+              width="118"
+              height="100"
+              fill="url(#corrugated-copper)"
+              stroke="#17212B"
+              stroke-width="2"
+            />
+            <!-- Vertical Galvanized Locking Bars -->
+            <rect x="-24" y="18" width="3" height="100" fill="url(#metallic-silver)" />
+            <rect x="-12" y="18" width="3" height="100" fill="url(#metallic-silver)" />
+            <!-- Stencil Brand Plate -->
+            <rect x="-102" y="52" width="70" height="28" rx="2" fill="#17212B" />
+            <text
+              x="-67"
+              y="70"
+              text-anchor="middle"
+              fill="#F3F5F4"
+              font-family="system-ui, sans-serif"
+              font-weight="800"
+              font-size="12"
+              letter-spacing="1.5"
+            >
+              TECHMO
+            </text>
+          </g>
+
+          <!-- Right Hinged 3D Corrugated Copper-Orange Door (Hinge at x=+118) -->
+          <g id="container-door-right" class="door-right-hinge">
+            <rect
+              x="0"
+              y="18"
+              width="118"
+              height="100"
+              fill="url(#corrugated-copper)"
+              stroke="#17212B"
+              stroke-width="2"
+            />
+            <!-- Vertical Galvanized Locking Bars -->
+            <rect x="9" y="18" width="3" height="100" fill="url(#metallic-silver)" />
+            <rect x="21" y="18" width="3" height="100" fill="url(#metallic-silver)" />
+            <!-- Technical Identification Plate -->
+            <rect x="32" y="54" width="72" height="24" rx="2" fill="#17212B" />
+            <text
+              x="68"
+              y="69"
+              text-anchor="middle"
+              fill="#DCE6EB"
+              font-family="system-ui, sans-serif"
+              font-weight="600"
+              font-size="8.5"
+              letter-spacing="0.8"
+            >
+              ENGINEERING
+            </text>
+          </g>
+
+          <!-- Bottom Heavy Steel Sill Rail -->
+          <rect x="-120" y="118" width="240" height="6" fill="#0E151C" />
+        </g>
+
+        <!-- ===============================================================
+             PAYLOAD 2: 3D-EXTRUDED WIDE-FLANGE STEEL PORTAL FRAME
+             Target Install Position: (x=760, y=380)
+             =============================================================== -->
+        <g id="payload-steel-frame" class="rigged-payload">
+          <!-- Rear Perspective Portal Bays (Depth Offset +24px, -14px) -->
+          <g opacity="0.58" transform="translate(22, -14)">
+            <path
+              d="M -165 235 L -165 56 L 0 2 L 165 56 L 165 235"
+              fill="none"
+              stroke="#17212B"
+              stroke-width="7"
+              stroke-linejoin="miter"
+            />
+            <line x1="-165" y1="142" x2="165" y2="142" stroke="#263646" stroke-width="5" />
+          </g>
+
+          <!-- Purlin & Girt Connectors Between Front and Rear Frames -->
+          <line x1="-175" y1="58" x2="-143" y2="42" stroke="#5C6F7E" stroke-width="2.5" />
+          <line x1="-90" y1="30" x2="-62" y2="16" stroke="#5C6F7E" stroke-width="2" />
+          <line x1="0" y1="0" x2="22" y2="-12" stroke="#E47732" stroke-width="3" />
+          <line x1="90" y1="30" x2="112" y2="16" stroke="#5C6F7E" stroke-width="2" />
+          <line x1="175" y1="58" x2="187" y2="42" stroke="#5C6F7E" stroke-width="2.5" />
+
+          <!-- Diagonal Rod X-Bracing in Side Bay -->
+          <line x1="-175" y1="60" x2="-143" y2="140" stroke="#7F919C" stroke-width="1.5" />
+          <line x1="-143" y1="42" x2="-175" y2="145" stroke="#7F919C" stroke-width="1.5" />
+
+          <!-- PRIMARY FRONT WIDE-FLANGE H-BEAM PORTAL FRAME -->
+          <!-- Left H-Column (Web + Front/Rear Flanges) -->
+          <rect x="-181" y="56" width="12" height="179" fill="url(#steel-navy-3d)" />
+          <line x1="-181" y1="56" x2="-181" y2="235" stroke="#5C6F7E" stroke-width="1.5" />
+          <line x1="-169" y1="56" x2="-169" y2="235" stroke="#0E151C" stroke-width="1.5" />
+
+          <!-- Right H-Column -->
+          <rect x="169" y="56" width="12" height="179" fill="url(#steel-navy-3d)" />
+          <line x1="169" y1="56" x2="169" y2="235" stroke="#5C6F7E" stroke-width="1.5" />
+          <line x1="181" y1="56" x2="181" y2="235" stroke="#0E151C" stroke-width="1.5" />
+
+          <!-- Center Interior Support Column -->
+          <rect x="-4" y="6" width="8" height="229" fill="url(#steel-navy-3d)" />
+
+          <!-- Tapered Steel Portal Rafters -->
+          <polygon
+            points="-181,56 0,-4 0,8 -169,68"
+            fill="url(#steel-jib-vertical)"
+          />
+          <polygon
+            points="181,56 0,-4 0,8 169,68"
+            fill="url(#steel-jib-vertical)"
+          />
+
+          <!-- Composite Steel Mezzanine Deck Girder -->
+          <rect x="-175" y="140" width="350" height="9" fill="url(#steel-jib-vertical)" />
+          <rect x="-175" y="138" width="350" height="2.5" fill="url(#metallic-silver)" />
+
+          <!-- Bolted Copper-Orange Haunch & Apex Connection Gusset Plates -->
+          <polygon points="-169,64 -124,49 -169,96" fill="url(#copper-orange-3d)" />
+          <polygon points="169,64 124,49 169,96" fill="url(#copper-orange-3d)" />
+          <polygon points="0,-4 -34,8 0,18 34,8" fill="url(#copper-orange-3d)" />
+        </g>
+
+        <!-- ===============================================================
+             PAYLOAD 3: LONG-SPAN SPACE TRUSS & STANDING-SEAM ROOF CLADDING
+             Target Install Position: (x=760, y=312)
+             =============================================================== -->
+        <g id="payload-roof-truss" class="rigged-payload">
+          <!-- 3D Roof Cladding Plane (Perspective Extruded Metallic Roof) -->
+          <polygon
+            points="-198,68 0,-4 22,-16 -174,54"
+            fill="url(#metallic-silver)"
+          />
+          <polygon
+            points="0,-4 198,68 218,54 22,-16"
+            fill="#9FB0BC"
+          />
+
+          <!-- Tubular Steel Space Truss Chords & Webbing -->
+          <polygon
+            points="-182,68 0,4 182,68"
+            fill="#17212B"
+            fill-opacity="0.22"
+            stroke="#17212B"
+            stroke-width="4"
+            stroke-linejoin="round"
+          />
+          <line x1="-182" y1="68" x2="182" y2="68" stroke="#17212B" stroke-width="4.5" />
+
+          <!-- Internal Tubular Web Members -->
+          <line x1="0" y1="4" x2="0" y2="68" stroke="#17212B" stroke-width="3" />
+          <line x1="-92" y1="36" x2="-92" y2="68" stroke="#17212B" stroke-width="2.5" />
+          <line x1="92" y1="36" x2="92" y2="68" stroke="#17212B" stroke-width="2.5" />
+          <line x1="-46" y1="20" x2="-46" y2="68" stroke="#263646" stroke-width="2" />
+          <line x1="46" y1="20" x2="46" y2="68" stroke="#263646" stroke-width="2" />
+
+          <line x1="-136" y1="68" x2="-92" y2="36" stroke="#E47732" stroke-width="2" />
+          <line x1="-92" y1="68" x2="-46" y2="20" stroke="#E47732" stroke-width="2" />
+          <line x1="-46" y1="68" x2="0" y2="4" stroke="#E47732" stroke-width="2.2" />
+          <line x1="136" y1="68" x2="92" y2="36" stroke="#E47732" stroke-width="2" />
+          <line x1="92" y1="68" x2="46" y2="20" stroke="#E47732" stroke-width="2" />
+          <line x1="46" y1="68" x2="0" y2="4" stroke="#E47732" stroke-width="2.2" />
+
+          <!-- Front Standing-Seam Roof Fascia & Copper-Orange Eave Trim -->
+          <path
+            d="M -202 70 L 0 -4 L 202 70"
+            fill="none"
+            stroke="#17212B"
+            stroke-width="6"
+            stroke-linecap="square"
+          />
+          <path
+            d="M -202 73 L 0 -1 L 202 73"
+            fill="none"
+            stroke="#E47732"
+            stroke-width="2.5"
+          />
+
+          <!-- Industrial Ridge Ventilator Monitor -->
+          <polygon
+            points="-36,-2 -28,-14 28,-14 36,-2"
+            fill="url(#steel-jib-vertical)"
+            stroke="#5C6F7E"
+            stroke-width="1"
+          />
+          <rect x="-24" y="-11" width="48" height="3" fill="#E47732" />
+        </g>
+
+        <!-- ===============================================================
+             PAYLOAD 4: ARCHITECTURAL 3D STEEL & GLASS A-FRAME VILLA
+             Target Install Position: (x=1130, y=390)
+             =============================================================== -->
+        <g id="payload-aframe" class="rigged-payload">
+          <!-- 3D Extruded Rear Roof Slope (Perspective Depth +28px, -10px) -->
+          <polygon
+            points="0,-8 28,-18 122,212 96,224"
+            fill="url(#steel-navy-3d)"
+          />
+          <!-- Recessed Architectural Glazed Curtain Wall -->
+          <polygon
+            points="-86,224 0,6 86,224"
+            fill="url(#curtain-glass)"
+          />
+          <!-- Warm Architectural Timber / Copper Under-Roof Soffit -->
+          <polygon
+            points="-92,224 0,-2 92,224 82,224 0,12 -82,224"
+            fill="url(#copper-orange-3d)"
+          />
+
+          <!-- Structural Mezzanine Loft Floor Slab -->
+          <rect x="-52" y="132" width="104" height="7" fill="url(#steel-jib-vertical)" />
+          <rect x="-52" y="130" width="104" height="2" fill="#E47732" />
+
+          <!-- Structural Steel Curtain-Wall Mullions & Transoms -->
+          <line x1="0" y1="10" x2="0" y2="224" stroke="#17212B" stroke-width="3.5" />
+          <line x1="-30" y1="132" x2="-30" y2="224" stroke="#17212B" stroke-width="2.5" />
+          <line x1="30" y1="132" x2="30" y2="224" stroke="#17212B" stroke-width="2.5" />
+          <line x1="-68" y1="180" x2="68" y2="180" stroke="#263646" stroke-width="2" />
+
+          <!-- Primary Outer Structural Steel A-Frame Portal Ribs -->
+          <polyline
+            points="-96,224 0,-8 96,224"
+            fill="none"
+            stroke="#17212B"
+            stroke-width="6.5"
+            stroke-linejoin="miter"
+          />
+        </g>
+
+        <!-- ===============================================================
+             COMPLETED ARCHITECTURAL FAÇADE, GLAZING & RECESSED LIGHTING
+             =============================================================== -->
+        <g id="completed-building-glow" class="rigged-payload">
+          <!-- Precast Architectural Concrete Dado Wall Panels -->
+          <rect
+            x="585"
+            y="524"
+            width="350"
+            height="91"
+            fill="url(#metallic-silver)"
+            stroke="#17212B"
+            stroke-width="2"
+          />
+
+          <!-- Left Bay: Insulated Sectional Overhead Industrial Door -->
+          <g transform="translate(608, 534)">
+            <rect width="128" height="81" fill="#17212B" stroke="#0E151C" stroke-width="2" />
+            <line x1="0" y1="16" x2="128" y2="16" stroke="#32414E" stroke-width="1.5" />
+            <line x1="0" y1="32" x2="128" y2="32" stroke="#32414E" stroke-width="1.5" />
+            <line x1="0" y1="48" x2="128" y2="48" stroke="#32414E" stroke-width="1.5" />
+            <line x1="0" y1="64" x2="128" y2="64" stroke="#32414E" stroke-width="1.5" />
+            <!-- Vision Lite Glazing Strip -->
+            <rect x="14" y="20" width="100" height="8" fill="url(#interior-tungsten)" />
+          </g>
+
+          <!-- Right Bay: Architectural Curtain-Wall Showroom Glazing -->
+          <g transform="translate(784, 534)">
+            <rect width="128" height="81" fill="url(#curtain-glass)" stroke="#17212B" stroke-width="2" />
+            <rect width="128" height="81" fill="url(#interior-tungsten)" />
+            <line x1="42" y1="0" x2="42" y2="81" stroke="#17212B" stroke-width="2" />
+            <line x1="85" y1="0" x2="85" y2="81" stroke="#17212B" stroke-width="2" />
+            <line x1="0" y1="40" x2="128" y2="40" stroke="#17212B" stroke-width="1.5" />
+          </g>
+
+          <!-- Upper Mezzanine Ribbon Clerestory Glazing -->
+          <g transform="translate(596, 452)">
+            <rect width="328" height="54" fill="url(#curtain-glass)" stroke="#17212B" stroke-width="2.5" />
+            <rect width="328" height="54" fill="url(#interior-tungsten)" opacity="0.7" />
+            <line x1="65" y1="0" x2="65" y2="54" stroke="#17212B" stroke-width="2" />
+            <line x1="130" y1="0" x2="130" y2="54" stroke="#17212B" stroke-width="2" />
+            <line x1="196" y1="0" x2="196" y2="54" stroke="#17212B" stroke-width="2" />
+            <line x1="262" y1="0" x2="262" y2="54" stroke="#17212B" stroke-width="2" />
+          </g>
+
+          <!-- Architectural Fascia Signboard -->
+          <rect x="688" y="418" width="144" height="24" rx="2" fill="#17212B" stroke="#5C6F7E" stroke-width="1" />
+          <rect x="688" y="418" width="5" height="24" fill="#E47732" />
+          <text
+            x="763"
+            y="434"
+            text-anchor="middle"
+            fill="#F3F5F4"
+            font-family="system-ui, sans-serif"
+            font-weight="800"
+            font-size="10.5"
+            letter-spacing="2"
+          >
+            TECHMO COMPLEX
+          </text>
+
+          <!-- A-Frame Warm Recessed Architectural Downlighting -->
+          <polygon
+            points="1082,518 1130,404 1178,518"
+            fill="url(#interior-tungsten)"
+          />
+          <polygon
+            points="1050,612 1080,524 1180,524 1210,612"
+            fill="url(#interior-tungsten)"
+            opacity="0.65"
+          />
+        </g>
+
+        <!-- ===============================================================
+             MECHANICAL TROLLEY, WIRE-ROPE CABLES, SHEAVE HOOK & SLINGS
+             =============================================================== -->
+        <g id="world-trolley" class="rigged-payload">
+          <!-- Mechanical Trolley Frame Riding Along Jib (Centered at x=0, y=110) -->
+          <rect
+            x="-46"
+            y="106"
+            width="92"
+            height="14"
+            rx="2"
+            fill="url(#steel-jib-vertical)"
+            stroke="#0E151C"
+            stroke-width="1.5"
+          />
+          <rect x="-36" y="110" width="72" height="3" fill="#E47732" />
+          <!-- Forged Steel Bogie Rollers -->
+          <circle cx="-30" cy="105" r="4.5" fill="#DCE6EB" stroke="#17212B" stroke-width="2" />
+          <circle cx="0" cy="105" r="4.5" fill="#DCE6EB" stroke="#17212B" stroke-width="2" />
+          <circle cx="30" cy="105" r="4.5" fill="#DCE6EB" stroke="#17212B" stroke-width="2" />
+        </g>
+
+        <!-- Dynamic Multi-Part Wire-Rope Cables, Slings & Hook Block -->
+        <g id="world-hoist-assembly">
+          <line
+            id="hoist-cable-left"
+            x1="360"
+            y1="120"
+            x2="360"
+            y2="320"
+            stroke="#263646"
+            stroke-width="2"
+          />
+          <line
+            id="hoist-cable-right"
+            x1="384"
+            y1="120"
+            x2="384"
+            y2="320"
+            stroke="#263646"
+            stroke-width="2"
+          />
+          <!-- High-Tensile Steel Rigging Slings -->
+          <line
+            id="rigging-sling-left"
+            x1="364"
+            y1="336"
+            x2="270"
+            y2="375"
+            stroke="#E47732"
+            stroke-width="2.2"
+          />
+          <line
+            id="rigging-sling-right"
+            x1="380"
+            y1="336"
+            x2="470"
+            y2="375"
+            stroke="#E47732"
+            stroke-width="2.2"
+          />
+          <!-- 3D Heavy Pulley Sheave Block & Forged Steel Hook -->
+          <g id="world-hook" class="rigged-payload">
+            <rect
+              x="-24"
+              y="-12"
+              width="48"
+              height="20"
+              rx="3"
+              fill="url(#steel-jib-vertical)"
+              stroke="#0E151C"
+              stroke-width="1.5"
+            />
+            <rect x="-20" y="-6" width="40" height="5" fill="#E47732" />
+            <circle cx="-12" cy="-2" r="2" fill="#DCE6EB" />
+            <circle cx="12" cy="-2" r="2" fill="#DCE6EB" />
+            <!-- Forged Swivel Hook & Spreader Shackle -->
+            <rect x="-5" y="8" width="10" height="5" fill="#5C6F7E" />
+            <path
+              d="M -2 13 L 2 13 L 2 21 C 2 27 -8 27 -7 21"
+              fill="none"
+              stroke="#17212B"
+              stroke-width="3.2"
+              stroke-linecap="round"
+            />
+          </g>
+        </g>
+      </g>
+
+      <!-- PARALLAX LAYER 3: Subtle Architectural Site Bollards & Hardscape -->
+      <g id="parallax-foreground" class="parallax-layer">
+        <!-- Left & Right Architectural Perimeter Lighting Bollards (No Cartoon Trees) -->
+        <rect x="52" y="618" width="4" height="22" fill="#17212B" />
+        <rect x="52" y="618" width="4" height="4" fill="#E47732" />
+
+        <rect x="1352" y="618" width="4" height="22" fill="#17212B" />
+        <rect x="1352" y="618" width="4" height="4" fill="#E47732" />
+      </g>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .crane-world-canvas {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--color-mist-white);
+  }
+
+  .world-cinematic-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .camera-rig {
+    transform-origin: 720px 440px;
+    will-change: transform;
+  }
+
+  .parallax-layer,
+  .rigged-payload {
+    will-change: transform, opacity;
+  }
+
+  .door-left-hinge {
+    transform-origin: -118px 68px;
+    will-change: transform, opacity;
+  }
+
+  .door-right-hinge {
+    transform-origin: 118px 68px;
+    will-change: transform, opacity;
+  }
+</style>

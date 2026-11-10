@@ -1,11 +1,18 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import ConstructionJourney from "../components/home/ConstructionJourney.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const title = "TECHMO | Engineering, Steel Buildings & Construction — Sri Lanka";
+const description =
+  "Scroll through construction with TECHMO: explore our interactive crane journey, industrial steel buildings, weatherproof roofing, custom fabrication and modern A-Frame structures in Sri Lanka.";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title={title} description={description}>
+  <Header />
+  <main id="main-content">
+    <ConstructionJourney />
+  </main>
+  <Footer />
+</BaseLayout>

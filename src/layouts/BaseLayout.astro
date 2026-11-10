@@ -1,0 +1,82 @@
+---
+import "../styles/global.css";
+
+/**
+ * BaseLayout Props
+ *
+ * Pages using BaseLayout must provide a `<main id="main-content">` element
+ * inside the default slot so the accessible skip link resolves properly.
+ */
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  robots?: string;
+  image?: string;
+  ogType?: "website" | "article";
+}
+
+const {
+  title,
+  description,
+  canonical,
+  robots = "index, follow",
+  image,
+  ogType = "website",
+} = Astro.props;
+
+function getValidAbsoluteHttpUrl(input?: string): string | undefined {
+  if (!input) return undefined;
+  const trimmed = input.trim();
+  if (!trimmed) return undefined;
+  try {
+    const parsed = new URL(trimmed);
+    if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+      return parsed.toString();
+    }
+    return undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function getValidImageUrl(input?: string): string | undefined {
+  if (!input) return undefined;
+  const trimmed = input.trim();
+  if (!trimmed) return undefined;
+  if (trimmed.startsWith("/")) {
+    return trimmed;
+  }
+  return getValidAbsoluteHttpUrl(trimmed);
+}
+
+const validCanonical = getValidAbsoluteHttpUrl(canonical);
+const validImageUrl = getValidImageUrl(image);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
+    {validCanonical && <link rel="canonical" href={validCanonical} />}
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    {validCanonical && <meta property="og:url" content={validCanonical} />}
+    {validImageUrl && <meta property="og:image" content={validImageUrl} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <slot />
+  </body>
+</html>

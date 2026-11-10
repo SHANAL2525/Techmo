@@ -1,0 +1,99 @@
+---
+export interface Props {
+  code?: string;
+  eyebrow: string;
+  title: string;
+  description?: string;
+  headingId?: string;
+  align?: "left" | "center";
+  accentTone?: "warm" | "sky" | "mint";
+}
+
+const {
+  code,
+  eyebrow,
+  title,
+  description,
+  headingId,
+  align = "left",
+  accentTone = "warm",
+} = Astro.props;
+---
+
+<header class:list={["section-heading", `align-${align}`, `tone-${accentTone}`]}>
+  <div class="heading-meta">
+    {code && <span class="code-pill">{code}</span>}
+    <p class="eyebrow-text">{eyebrow}</p>
+  </div>
+  <h2 id={headingId} class="h2 section-title">{title}</h2>
+  {description && <p class="text-lead section-desc">{description}</p>}
+</header>
+
+<style>
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    max-width: 50rem;
+  }
+
+  .section-heading.align-center {
+    margin-inline: auto;
+    text-align: center;
+    align-items: center;
+  }
+
+  .heading-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+    padding: 0.3rem 0.85rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--surface-warm-cream);
+    border: 1px solid var(--border-warm);
+    width: fit-content;
+  }
+
+  .tone-sky .heading-meta {
+    background-color: var(--surface-soft-sky);
+    border-color: var(--border-sky);
+  }
+
+  .tone-mint .heading-meta {
+    background-color: var(--surface-soft-mint);
+    border-color: var(--border-mint);
+  }
+
+  .code-pill {
+    font-size: 0.75rem;
+    font-weight: var(--weight-bold);
+    color: var(--color-orange-primary);
+  }
+
+  .tone-sky .code-pill {
+    color: #0284C7;
+  }
+
+  .tone-mint .code-pill {
+    color: #059669;
+  }
+
+  .eyebrow-text {
+    margin: 0;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-navy-deep);
+    letter-spacing: 0.01em;
+  }
+
+  .section-title {
+    margin: 0;
+    color: var(--color-navy-deep);
+  }
+
+  .section-desc {
+    margin: 0;
+    color: var(--color-slate);
+  }
+</style>
